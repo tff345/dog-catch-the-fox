@@ -150,3 +150,27 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+test/media/texts/8f867a0831b87c0e.svg
+test/media/texts/a940408600979452.svg
+test/media/texts/cb2b2b2fd0f42b33.svg
+test/media/texts/e80cd45642ad4608.svg
+test/media/videos/tst/720p30/TstVector.mp4
+test/media/videos/tst/720p30/partial_movie_files/TstVector/274514146_2105143445_223132457.mp4
+test/media/videos/tst/720p30/partial_movie_files/TstVector/274514146_3856070364_223132457.mp4
+test/media/videos/tst_txt/720p30/Tst.mp4
+test/media/videos/tst_txt/720p30/partial_movie_files/Tst/274514146_2796631629_223132457.mp4
+test/media/videos/tst_txt/720p30/partial_movie_files/Tst/274514146_3105817550_223132457.mp4
+test/media/videos/tst_txt/720p30/partial_movie_files/Tst/274514146_3695303051_223132457.mp4
+test/media/videos/tst_txt/720p30/partial_movie_files/Tst/2789044632_125286499_2405816116.mp4
+test/media/videos/tst_txt/720p30/partial_movie_files/Tst/2789044632_125286499_3209147704.mp4
+test/media/videos/tst_txt/720p30/partial_movie_files/Tst/2789044632_125286499_4008555405.mp4
+test/media/videos/tst_txt/720p30/partial_movie_files/Tst/2789044632_2280379813_1702230062.mp4
+test/media/videos/tst_txt/720p30/partial_movie_files/Tst/2789044632_4033351437_2951001457.mp4
+test/media/Tex/7a793ba71cc7f17d.aux
+test/media/Tex/7a793ba71cc7f17d.svg
+test/media/Tex/351ef531bf2fb97b.aux
+test/media/Tex/351ef531bf2fb97b.svg
+test/media/Tex/827a634d21a8f08f.aux
+test/media/Tex/827a634d21a8f08f.svg
+test/media/Tex/fb48d97e63d28038.aux
+test/media/Tex/fb48d97e63d28038.svg
