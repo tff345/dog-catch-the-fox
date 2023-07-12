@@ -4,8 +4,8 @@ class TxtLib():
     def __init__(self): 
         self.txt = {
             "title" : "猎犬追狐问题",
-            "1_1" : '一狐F以恒速v<sub>1</sub>沿直线AB逃跑, 一犬以恒速v<sub>2</sub>追击，速度方向始终对准狐。', 
-            '1_2' : "t=0 时刻, 狐在AB上的F处, 犬在D处, 且DF⊥AB, DF=L, 设v<sub>2</sub>>v<sub>1</sub>, 求犬的轨迹方程。", 
+            "1_1" : '一狐F以恒速v<sub>1</sub>沿x轴逃跑, 一犬以恒速v<sub>2</sub>追击，速度方向始终对准狐。', 
+            '1_2' : "t=0 时刻, 狐在x轴上的F处, 犬在D处, 且DF⊥x轴, DF=L, 设v<sub>2</sub>>v<sub>1</sub>, 求犬的轨迹方程。", 
             '2' : r'设D<sub>1</sub>与F<sub>1</sub>间距离为q, D<sub>1</sub>F<sub>1</sub>与DF夹角为θ', 
             '3' : 'FF<sub>1</sub>方向上的位置关系为 ', 
             
@@ -24,5 +24,4 @@ class TxtLib():
 
         }
         
-
 

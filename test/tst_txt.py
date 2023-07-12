@@ -1,5 +1,5 @@
 from manim import *
-from text import TxtLib
+from source_text import TxtLib
 
 class Tst(Scene):
     def construct(self):
