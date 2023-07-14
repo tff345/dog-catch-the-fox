@@ -24,10 +24,10 @@ class Tst(Scene):
         mrk_v1 = self.my_text("v<sub>1</sub>").next_to(arrow_f, DOWN)
         mrk_v2 = self.my_text("v<sub>2</sub>").next_to(arrow_d, LEFT)
         
-        group = VGroup(dot_fox, dot_dog, mrk_f, mrk_d, arrow_f, mrk_v1, arrow_d, mrk_v2)
+        grp_axis = VGroup(dot_fox, dot_dog, mrk_f, mrk_d, arrow_f, mrk_v1, arrow_d, mrk_v2)
 
         self.play(Write(ax))
-        self.play(Write(group))
+        self.play(Write(grp_axis))
 
         
 

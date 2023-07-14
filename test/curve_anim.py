@@ -21,9 +21,9 @@ class Tst(Scene):
         dot_f1 = Dot(ax.coords_to_point(0.79, 0), color=ORANGE)
 
         mrk_d = self.my_text("D").next_to(dot_dog, UR*0.6)
-        mrk_d1 = self.my_text("D<sub>1</sub>").next_to(dot_d1, UR*0.6)
-        mrk_f = self.my_text("F").next_to(dot_fox, UR*0.6)
-        mrk_f1= self.my_text("F<sub>1</sub>").next_to(dot_f1, UR*0.6)
+        mrk_d1 = self.my_text("D<sub>1</sub>").next_to(dot_d1, UP*0.6)
+        mrk_f = self.my_text("F").next_to(dot_fox, UL*0.6)
+        mrk_f1= self.my_text("F<sub>1</sub>").next_to(dot_f1, DOWN*0.6)
 
         arrow_d = Vector([0,-0.6]).next_to(dot_dog, LEFT) 
         arrow_f = Vector([0.4,0]).next_to(dot_fox, DOWN) 
@@ -32,23 +32,28 @@ class Tst(Scene):
 
         func = lambda x : -np.log(x+0.14)
         curv1 = ax.plot(func, [0,0.5], use_vectorized=True)
-        dashedline = DashedLine(dot_d1.get_center(),dot_f1.get_center())
+        dsd_line = DashedLine(dot_d1.get_center(),dot_f1.get_center())
+        a = Angle(ax.x_axis, dsd_line, radius=0.3, quadrant=(-1,-1), other_angle=True)
+        a_value = Tex(r"$\theta$", font_size=24).next_to(a, LEFT*0.6)
+        br = Brace(dsd_line, direction=dsd_line.copy().rotate(PI / 2).get_unit_vector())
+        var_q = self.my_text("q").next_to(br, UR*0.4)
         
-        group_d = VGroup(dot_dog, mrk_d, arrow_d, mrk_v2)
-        group_f = VGroup(dot_fox, mrk_f, arrow_f, mrk_v1)
-        group_d1 = VGroup(dot_d1,mrk_d1)
-        group_f1 = VGroup(dot_f1, mrk_f1)
+        grp_d = VGroup(dot_dog, mrk_d, arrow_d, mrk_v2)
+        grp_f = VGroup(dot_fox, mrk_f, arrow_f, mrk_v1)
+        grp_d1 = VGroup(dot_d1,mrk_d1)
+        grp_f1 = VGroup(dot_f1, mrk_f1)
 
         self.play(Create(ax))
-        self.play(Write(group_f), Write(group_d))
-        self.wait()
+        self.play(Write(grp_f), Write(grp_d))
+        self.wait(0.5)
         self.play(Write(curv1))
-        self.play(Write(group_d1), Write(group_f1))
-        self.play(Write(dashedline))
+        self.play(Write(grp_d1), Write(grp_f1))
+        self.play(Write(dsd_line), Write(a))
+        self.play(Write(a_value))
+        self.play(FadeIn(br, var_q))
 
     
-    
-    
+        
     def myfunc(self, x):
         pm = 0.5
         pL = 2
