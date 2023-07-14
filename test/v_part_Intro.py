@@ -4,7 +4,7 @@ from source_text import TxtLib
 class Tst(Scene):
     txt = TxtLib()
     def construct(self):
-        title =  MarkupText(self.txt.txt['title'], justify=True, font_size=40, color=BLUE_C)
+        title =  MarkupText(self.txt.txt['title'], justify=True, font_size=40, color=GOLD)
         group = VGroup(title)
         group.shift(UP*3)
 
