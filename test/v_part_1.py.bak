@@ -1,17 +1,21 @@
 from manim import *
 from source_text import TxtLib
 
-class Tst(Scene):
+class V_P1(Scene):
     txt = TxtLib()
     def my_text(self, content):
         return MarkupText(content, font_size=20)
-    
-    
-    def construct(self):
+    def __init__(self):
+        # v_part_1:
+        # show question
+        question =  MarkupText(self.txt.txt['1_1'] + "\n" + 
+                               "\n" + self.txt.txt['1_2'], 
+                               justify=True, font_size=24)
+        # draw the figure
         ax = Axes(x_range=(-0.5, 3), 
                   y_range=(0, 3),
                   x_length=7,
-                  y_length=3, 
+                  y_length=3,
                   axis_config={
                       'include_ticks' : False
                       }).move_to((-1, -1, 0))
@@ -29,21 +33,37 @@ class Tst(Scene):
         arrow_f = Vector([0.4,0]).next_to(dot_fox, DOWN) 
         mrk_v1 = self.my_text("v<sub>1</sub>").next_to(arrow_f, DOWN)
         mrk_v2 = self.my_text("v<sub>2</sub>").next_to(arrow_d, LEFT)
-
+        # show the simulated curve
         func = lambda x : -np.log(x+0.14)
         curv1 = ax.plot(func, [0,0.5], use_vectorized=True)
+        # add parameters
         dsd_line = DashedLine(dot_d1.get_center(),dot_f1.get_center())
         a = Angle(ax.x_axis, dsd_line, radius=0.3, quadrant=(-1,-1), other_angle=True)
         a_value = Tex(r"$\theta$", font_size=24).next_to(a, LEFT*0.6)
         br = Brace(dsd_line, direction=dsd_line.copy().rotate(PI / 2).get_unit_vector())
         var_q = self.my_text("q").next_to(br, UR*0.2)
-        
-        grp_d = VGroup(dot_dog, mrk_d, arrow_d, mrk_v2)
-        grp_f = VGroup(dot_fox, mrk_f, arrow_f, mrk_v1)
-        grp_d1 = VGroup(dot_d1,mrk_d1)
-        grp_f1 = VGroup(dot_f1, mrk_f1)
-        fig_1 = VGroup(ax,curv1,grp_d,grp_d1,grp_f,grp_f1,a_value,var_q,br,a,dsd_line)
+        grp_txt = VGroup(question)
+        grp_txt.shift(UP*3)
+        self.grp_txt = grp_txt
+        self.ax = ax
+        self.curv1 =curv1
+        self.grp_d = VGroup(dot_dog, mrk_d, arrow_d, mrk_v2)
+        self.grp_f = VGroup(dot_fox, mrk_f, arrow_f, mrk_v1)
+        self.grp_d1 = VGroup(dot_d1,mrk_d1)
+        self.grp_f1 = VGroup(dot_f1, mrk_f1)
+        self.grp_q =VGroup(var_q, br)
+        self.grp_ang = VGroup(a,a_value, dsd_line)
+        self.fig_1 = VGroup(ax,curv1,self.grp_d,self.grp_d1,self.grp_f,self.grp_f1,self.grp_ang,self.grp_q)
 
-        self.add(fig_1)
+    def construct(self):
         
+        #self.play(Write(self.grp_txt), run_time=4)
+        self.play(Create(self.ax))
+        self.play(Write(self.grp_f), Write(self.grp_d))
+        self.wait(0.5)
+        self.play(Write(self.curv1))
+        self.play(Write(self.grp_d1), Write(self.grp_f1))
+        self.play(Write(self.grp_ang))
+        self.play(FadeIn(self.grp_q))
+
 
