@@ -52,12 +52,5 @@ class Tst(Scene):
         self.play(Write(a_value))
         self.play(FadeIn(br, var_q))
 
-    
-        
-    def myfunc(self, x):
-        pm = 0.5
-        pL = 2
-        return -(pL/2*(1-pm))*(x/pL)**(1-pm) + (pL/2*(1+pm))*(x/pL)**(1+pm) + pm*pL/(1-pm**2)
-
         
 
