@@ -8,20 +8,22 @@ class TxtLib():
             '1_2' : "t=0 时刻, 狐在x轴上的F处，犬在D处，且DF⊥x轴，DF=L，设v<sub>2</sub>>v<sub>1</sub>，求犬的轨迹方程。", 
             '2' : r'设D<sub>1</sub>与F<sub>1</sub>间距离为q，FF<sub>1</sub>与DF夹角为θ，', 
             '3a' : 'FF<sub>1</sub>方向上的位置关系为 ' , 
-            '3b' : "DF<sub>1</sub>方向上的位置关系为 "
+            '3b' : "DF<sub>1</sub>方向上的位置关系为 ", 
+            '4' : "两式关于时间t求导得到速度关系式",
+            '5' : "同时我们有位置关系的积分表示"
             
         }
         self.fml = {
             '1a' : r"$ x_{1} = x_{2} + q\cdot \cos x $", 
             '2a' : r"$ x_{1}' = x_{2}' + q $", 
-            '3a' : r"v_{1} = v_{2}\cdot\cos \theta +\frac{\mathrm{d} (q\cdot \cos q)}{\mathrm{d} t}",
-            '4a' : r"v_{1}\cdot\cos \theta = v_{2} + \frac{\mathrm{d} q}{\mathrm{d} t}", 
-            '5a' : r"v_{1} \cdot t_{1} = \int_{0}^{t_{1}}(v_{2} \cdot \cos \theta ) \mathrm{d}t +q\cdot\cos\theta",
-            '6a' : r"\int_{0}^{t_{1}}(v_{1} \cdot \cos \theta )+L=v_{2}+q", 
+            '3a' : r"$ v_{1} = v_{2}\cdot\cos \theta +\frac{\mathrm{d} (q\cdot \cos q)}{\mathrm{d} t} $",
+            '4a' : r"$ v_{1}\cdot\cos \theta = v_{2} + \frac{\mathrm{d} q}{\mathrm{d} t} $", 
+            '5a' : r"$ v_{1} \cdot t_{1} = \int_{0}^{t_{1}}(v_{2} \cdot \cos \theta ) \mathrm{d}t +q\cdot\cos\theta $",
+            '6a' : r"$ \int_{0}^{t_{1}}(v_{1} \cdot \cos \theta )+L=v_{2}+q $", 
             '5b' : r"",
-            'finalfml' : r"""
+            'finalfml' : r"""$ 
             x=-\frac{L}{2\left(1-m\right)}\left(\frac{y}{L}\right)^{\left(1-m\right)}+\frac{L}{2\left(1+m\right)}\left(\frac{y}{L}\right)^{\left(1+m\right)}+\frac{mL}{1-m^{2}}
-            """
+            $"""
 
         }
         

@@ -65,6 +65,16 @@ class V_P1(Scene):
         txt_3b = self.my_text(self.txt.txt['3b']).next_to(txt_3a,DOWN*3)
         fml_1a = self.my_tex(self.txt.fml['1a']).next_to(txt_3a,DOWN)
         fml_2a = self.my_tex(self.txt.fml['2a']).next_to(txt_3b,DOWN)
+        fml_1a.generate_target()
+        fml_1a.target.move_to((3,1,0))
+        fml_2a.generate_target()
+        fml_2a.target.next_to(fml_1a.target,DOWN).align_to(fml_1a, LEFT)
+
+        arr1 = Arrow(start=(1,0,0),end=(0,-1,0))
+        grp_fml_3 = VGroup(self.my_tex(self.txt.fml['3a']), 
+                           self.my_tex(self.txt.fml['4a'])
+                           ).arrange(DOWN).move_to((0,-2,0))
+        txt_4 = self.my_text(self.txt.txt['4']).move_to((-3,2,0))
 
         self.play(Write(grp_txt_1), run_time=4)
         self.play(Create(ax))
@@ -73,11 +83,11 @@ class V_P1(Scene):
         self.play(Write(curv1))
         self.play(Write(grp_d1), Write(grp_f1))
         self.play(Write(dsd_line))
-
+        # v_part_2
         self.play(Unwrite(grp_txt_1),run_time=0.8)
         self.wait()
         self.play(Write(txt_2))
-        
+        #
         self.play(FadeIn(grp_q))
         self.play(Write(grp_ang))
         self.play(Unwrite(txt_2),run_time=0.8)
@@ -87,5 +97,18 @@ class V_P1(Scene):
         self.wait()
         self.play(Write(txt_3b),Write(fml_2a))
         self.wait()
+        self.play(FadeOut(fig_1))
+
+        self.play(FadeOut(txt_3a),FadeOut(txt_3b))
+        
+        self.play(MoveToTarget(fml_1a),MoveToTarget(fml_2a))
+        self.wait()
+        self.play(Write(txt_4),Write(arr1))
+        self.play(Write(grp_fml_3))
+        self.play(FadeOut(arr1))
+
+
+
+
 
 
