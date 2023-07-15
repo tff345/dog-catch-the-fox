@@ -10,7 +10,8 @@ class TxtLib():
             '3a' : 'FF<sub>1</sub>方向上的位置关系为 ' , 
             '3b' : "DF<sub>1</sub>方向上的位置关系为 ", 
             '4' : "两式关于时间t求导得到速度关系式",
-            '5' : "同时我们有位置关系的积分表示"
+            '5' : "同时我们有位置关系的积分表示", 
+            '6' : "消去积分项，我们可以得到t与θ，q的关系", 
             
         }
         self.fml = {
@@ -18,9 +19,12 @@ class TxtLib():
             '2a' : r"$ x_{1}' = x_{2}' + q $", 
             '3a' : r"$ v_{1} = v_{2}\cdot\cos \theta +\frac{\mathrm{d} (q\cdot \cos q)}{\mathrm{d} t} $",
             '4a' : r"$ v_{1}\cdot\cos \theta = v_{2} + \frac{\mathrm{d} q}{\mathrm{d} t} $", 
-            '5a' : r"$ v_{1} \cdot t_{1} = \int_{0}^{t_{1}}(v_{2} \cdot \cos \theta ) \mathrm{d}t +q\cdot\cos\theta $",
-            '6a' : r"$ \int_{0}^{t_{1}}(v_{1} \cdot \cos \theta )+L=v_{2}+q $", 
-            '5b' : r"",
+            '5a' : r"$ v_{1} t_{1} = \int_{0}^{t_{1}}(v_{2} \cdot \cos \theta ) \mathrm{d}t +q\cdot\cos\theta $",
+            '6a' : r"$ \int_{0}^{t_{1}}(v_{1} \cdot \cos \theta )+L=v_{2} t_{1} + q $", 
+            '5b' : r"$ v_{2} \int_{0}^{t_{1}} \cos \theta \mathrm{d}t = v_{1} t_{1} - q \cdot \cos \theta $",
+            '6b' : r"$ v_{1} \int_{0}^{t_{1}} \cos \theta \mathrm{d}t = v_{2} t_{1} + q - L $",
+            '5b6bto6c-left1' : r"$ \frac{v_{2} \int_{0}^{t_{1}} \cos \theta \mathrm{d}t}{v_{1} \int_{0}^{t_{1}} \cos \theta \mathrm{d}t} $",
+            '8' : r"$ (\frac{1}{m} \csc \theta - \cot \theta )\mathrm{d} \theta =\frac{\mathrm{d} q}{q} $", 
             'finalfml' : r"""$ 
             x=-\frac{L}{2\left(1-m\right)}\left(\frac{y}{L}\right)^{\left(1-m\right)}+\frac{L}{2\left(1+m\right)}\left(\frac{y}{L}\right)^{\left(1+m\right)}+\frac{mL}{1-m^{2}}
             $"""
