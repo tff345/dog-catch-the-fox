@@ -44,11 +44,13 @@ class V_P1(Scene):
             return MarkupText(content, font_size=26)
         
         # show question
-        question =  MarkupText(r'一狐F以恒速<i>v<sub>1</sub></i>沿<i>x</i>轴逃跑，一犬以恒速<i>v<sub>2</sub></i>追击，速度方向始终对准狐。''\n''\n'
-                                r"<i>t=0 </i>时刻, 狐在<i>x</i>轴上的F处，犬在D处，且DF⊥<i>x</i>轴，DF=L，设<i>v<sub>2</sub>>v<sub>1</sub></i>，求犬的轨迹方程。",
-                               font_size=26)
+        question =  MarkupText(
+             r"一狐F以恒速<i>v<sub>1</sub></i>沿<i>x</i>轴逃跑，一犬以恒速<i>v<sub>2</sub></i>追击，速度方向始终对准狐。"
+             r"<i>t=0 </i>时刻, 狐在<i>x</i>轴上的F处，犬在D处，且DF⊥<i>x</i>轴，DF=L，设<i>v<sub>2</sub>>v<sub>1</sub></i>，求犬的轨迹方程。",
+             justify=True
+             )
         
-        question.shift(UP*3)
+        question.set_color(YELLOW).scale(0.7).shift(UP*3)
         self.play(Write(question), run_time=4)
         # draw the figure
         ax = Axes(x_range=(-0.5, 3), 
@@ -75,7 +77,7 @@ class V_P1(Scene):
         mrk_v2 = mytext("<i>v<sub>2</sub></i>").next_to(arrow_d, LEFT)
         # show the simulated curve
         func = lambda x : -np.log(x+0.14)
-        curv1 = ax.plot(func, [0,0.5], use_vectorized=True)
+        curv1 = ax.plot(func, [0,0.5], use_vectorized=True).set_opacity(0.8)
         # add parameters
         dsd_line = DashedLine(dot_d1.get_center(),dot_f1.get_center())
         # anim_1
@@ -91,14 +93,16 @@ class V_P1(Scene):
         self.play(Write(dsd_line))
         
 
-        txt_2 = mytext(r'设D<sub>1</sub>与F<sub>1</sub>间距离为<i>q</i>，FF<sub>1</sub>与DF夹角为θ，').shift(UP*1.5)
+        txt_2 = mytext(
+             r'设D<sub>1</sub>与F<sub>1</sub>间距离为<i>q</i>，FF<sub>1</sub>与DF夹角为θ，'
+             ).shift(UP*1.7)
         self.play(Write(txt_2))
         a = Angle(ax.x_axis, dsd_line, radius=0.3, quadrant=(-1,-1), other_angle=True)
         a_value = MathTex(r"\theta", font_size=26).next_to(a, LEFT*0.6)
         grp_ang = VGroup(a,a_value)
         br = Brace(dsd_line, direction=dsd_line.copy().rotate(PI / 2).get_unit_vector())
-        distance_q = mytext("<i>q</i>").next_to(br, UR*0.2)
-        grp_q = VGroup(br, distance_q)
+        br_txt = br.get_tex('q')
+        grp_q = VGroup(br, br_txt)
         self.play(FadeIn(grp_q))
         self.play(Write(grp_ang))
         
@@ -106,23 +110,13 @@ class V_P1(Scene):
         self.play(Unwrite(question),run_time=0.8)
 
         fig_1 = VGroup(ax,curv1,grp_d,grp_d1,grp_f,grp_f1,grp_ang,grp_q,dsd_line)
-        fig_1.generate_target()
-        fig_1.target.move_to((0,2,0)).scale(0.7)
-        self.play(MoveToTarget(fig_1))
-        
+        self.play(fig_1.animate.scale(0.7).shift(UP*3))
         self.wait()
         
         txt_3a = mytext('FF<sub>1</sub>方向上的位置关系为 ').shift(DOWN)
         txt_3b = mytext("DF<sub>1</sub>方向上的位置关系为 ").next_to(txt_3a,DOWN*3)
         fml_1a = self.mytex(r" x_{1} = x_{2} + q\cdot \cos x ").next_to(txt_3a,DOWN)
         fml_2a = self.mytex(r" x_{1}' = x_{2}' + q ").next_to(txt_3b,DOWN)
-        fml_1_2 = MathTex(r" x_{1} &= x_{2} + q\cdot \cos x ",
-                          r"\\",
-                          r" x_{1}' &= x_{2}' + q ",font_size=40).move_to((3,0.5,0))
-        #fml_1a.generate_target()
-        #fml_1a.target.move_to((3,0.5,0))
-        #fml_2a.generate_target()
-        #fml_2a.target.next_to(fml_1a.target,DOWN).align_to(fml_1a.target.get_left(), LEFT)
         
         self.play(Write(txt_3a),Write(fml_1a))
         self.wait()
@@ -130,13 +124,17 @@ class V_P1(Scene):
         self.wait()
         
         self.play(FadeOut(txt_3a),FadeOut(txt_3b))
+        fml_1_2 = MathTex(r" x_{1} &= x_{2} + q\cdot \cos x ",
+                          r"\\",
+                          r" x_{1}' &= x_{2}' + q ",font_size=40
+                          ).move_to((3,0.5,0))
         self.play(ReplacementTransform(fml_1a,fml_1_2[0]),ReplacementTransform(fml_2a,fml_1_2[2]))
+        self.play(FadeOut(fig_1,direction=UP))
         self.wait()
-        self.play(FadeOut(fig_1))
         def myarrow(start=(0,0,0), end=(1,0,0)):
             return Arrow(start,end,color=BLUE).set_opacity(0.7)
 
-        arr1 = myarrow((1.5,0,0), (0.5,-1,0))
+        arr1 = MathTex("\Longleftarrow", font_size=36).rotate(PI/4).move_to((1,-0.5,0))
         txt_4 = mytext('两式关于时间<i>t</i>求导得到速度关系式').move_to((-3,2,0))
         txt_5 = mytext('同时我们有位置关系的积分表示').next_to(txt_4.get_center(), DOWN*2)
         fml3 = MathTex(
@@ -150,18 +148,8 @@ class V_P1(Scene):
         self.play(Write(fml3[:]))
         arr2 = myarrow((1,0,0),(-1,0,0))
         self.play(Write(txt_5), FadeIn(arr2))
-        txt_6 = mytext(r"消去积分项，我们可以得到<i>t</i>与θ，<i>q</i>的关系").move_to((-3,2,0))
-        '''
-        fml5a6a = VGroup(self.mytex(fml['5a']), 
-                          self.mytex(fml['6a'])
-                          ).arrange(DOWN).move_to((-3.5,0.2,0))
-
-        grp_fml5b6b = VGroup(self.mytex(fml['5b']), 
-                          self.mytex(fml['6b'])
-                          ).arrange(DOWN).move_to((-3.5,0.2,0))
+        txt_6 = mytext(r"消去积分项，我们可以得到<i>t</i>与θ，<i>q</i>的关系").move_to((-2.5,2,0))
         
-        grp_fmlto6c_1 = VGroup(self.mytex(fml['5b6bto6c-left1'], ft_size=40)).move_to((-3.5,0.2,0))
-        '''
         fml5a6a = MathTex(
           r" &v_{1} t_{1} = \int_{0}^{t_{1}}(v_{2} \cdot \cos \theta ) \mathrm{d}t +q\cdot\cos\theta ",
           r'\\',
