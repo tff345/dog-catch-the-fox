@@ -62,6 +62,7 @@ class V_P1(Scene):
                       'include_ticks' : False,
                       'tip_shape': StealthTip
                       }).move_to((-1, -1, 0))
+        
         self.play(Create(ax))
         dot_dog = Dot(ax.coords_to_point(0, 2), color=GRAY_BROWN)
         dot_fox = Dot(ax.coords_to_point(0, 0), color=ORANGE)
@@ -158,6 +159,7 @@ class V_P1(Scene):
         self.play(Write(fml5a6a))
         txt_6 = mytext(r"消去积分项，我们可以得到<i>t</i>与θ，<i>q</i>的关系").move_to((-2.5,2,0))
         
+
         self.play(FadeOut(arr2))
         self.play(FadeOut(fml3_velocity_relation),FadeOut(fml_1_displacement_relation))
         grp_fml5b6b = MathTex(
@@ -177,17 +179,22 @@ class V_P1(Scene):
         self.play(FadeOut(txt_4),Transform(txt_5, txt_6))
         self.wait()
         fmlto6c_1 = MathTex(
-            r"\frac{v_{2}}{v_{1}} ",
-            r'=\frac{v_{1} t_{1} - q \cdot \cos \theta}{v_{2} t_{1} + q - L} ',
-              font_size=40).move_to((-2.5,0.2,0))
+            r" { {{ v_2 }} \over  {{ v_1 }}  }",
+            r"= { {{v_1 t_1 - q \cdot \cos \theta}} \over {{ v_2 t_1 + q - L }} }",
+            font_size=40
+        ).move_to((-2.5,0.2,0))
+        self.add(fmlto6c_1)
         
         self.play(
              TransformMatchingShapes(grp_fml5b6b[0::3], fmlto6c_1[0]),
              TransformMatchingShapes(grp_fml5b6b[1::3], fmlto6c_1[1])
              )
         self.wait()
-
-             
-
-
-
+        fmlto6c_2 = MathTex(
+             r"{{ v_2 }} ( {{ v_2 t_1 + q - L}})",
+             r"={{ v_1 }} ( {{v_1 t_1 - q \cdot \cos \theta}} )",
+             font_size=40
+        ).move_to((-2.5,0.2,0))
+        self.play(
+             TransformMatchingTex(fmlto6c_1,fmlto6c_2)
+        )    
