@@ -138,9 +138,9 @@ class V_P1(Scene):
         self.wait()
 
         arr1 = MathTex("\Longleftarrow", font_size=36).rotate(PI/4).move_to((1,-0.5,0))
-        txt_4 = mytext('两式关于时间<i>t</i>求导得到速度关系式').move_to((-3,2.5,0))
-
+        txt_4 = mytext('两式关于时间<i>t</i>求导得到速度关系式').move_to((-3,2.5,0))        
         self.play(Write(txt_4),FadeIn(arr1))
+
         fml3_velocity_relation = MathTex(
              r'&v_{1} = v_{2}\cdot\cos \theta +\frac{\mathrm{d} (q\cdot \cos q)}{\mathrm{d} t}'
              r'\\'
@@ -148,53 +148,54 @@ class V_P1(Scene):
              font_size=36).move_to((0,-2,0))
         self.play(Write(fml3_velocity_relation))
         self.play(FadeOut(arr1))
+        
         txt_5 = mytext('同时我们有位置关系的积分表示').next_to(txt_4.get_center(), DOWN*2)
         arr2 = MathTex("\Longleftarrow", font_size=36).move_to((0,0.5,0))
         fml5a6a = MathTex(
-          r" & v_{1} t_{1} = \int_{0}^{t_{1}}(v_{2} \cdot \cos \theta ) \mathrm{d}t +q\cdot\cos\theta "
-          r" \\ ",
+          r" & v_{1} t_{1} = \int_{0}^{t_{1}}(v_{2} \cdot \cos \theta ) \mathrm{d}t +q\cdot\cos\theta \\ ",
           r" & \int_{0}^{t_{1}}(v_{1} \cdot \cos \theta )\mathrm{d}t+L = v_{2} t_{1} + q ",
-          font_size=36).move_to((-3.5,0.2,0))
+          font_size=36).move_to((-3.5,0.4,0))
         self.play(Write(txt_5), FadeIn(arr2))
         self.play(Write(fml5a6a))
-        txt_6 = mytext(r"消去积分项，我们可以得到<i>t</i>与θ，<i>q</i>的关系").move_to((-2.5,2,0))
         
-
+        txt_6 = mytext(r"消去积分项，我们可以得到<i>t</i>与<i>θ</i>，<i>q</i>的关系").move_to((-2.5,2,0))
         self.play(FadeOut(arr2))
-        self.play(FadeOut(fml3_velocity_relation),FadeOut(fml_1_displacement_relation))
+        self.play(
+             FadeOut(fml3_velocity_relation, direction=RIGHT),
+             FadeOut(fml_1_displacement_relation, direction=RIGHT)
+             )
+        
         grp_fml5b6b = MathTex(
           r" v_{2} \cdot \int_{0}^{t_{1}} \cos \theta \mathrm{d}t",
-          r" &= v_{1} t_{1} - q \cdot \cos \theta ",
-          r" \\ ",
+          r" &= v_{1} t_{1} - q \cdot \cos \theta \\ ",
           r" v_{1} \cdot \int_{0}^{t_{1}} \cos \theta \mathrm{d}t",
           r"&= v_{2} t_{1} + q - L ",
           font_size=36 
-          ).move_to((-3.5,0.2,0))
-        
+          ).move_to((-3.5,0.5,0))
         self.play(
              TransformMatchingShapes(fml5a6a[0], grp_fml5b6b[:2]),
-             TransformMatchingShapes(fml5a6a[1], grp_fml5b6b[3:])
+             TransformMatchingShapes(fml5a6a[1], grp_fml5b6b[2:])
              )
         self.wait()
         self.play(FadeOut(txt_4),Transform(txt_5, txt_6))
         self.wait()
+        
         fmlto6c_1 = MathTex(
             r" { {{ v_2 }} \over  {{ v_1 }}  }",
             r"= { {{v_1 t_1 - q \cdot \cos \theta}} \over {{ v_2 t_1 + q - L }} }",
             font_size=40
-        ).move_to((-2.5,0.2,0))
-        self.add(fmlto6c_1)
-        
+        ).move_to((-2.5,0.5,0))
+        #self.add(fmlto6c_1)
         self.play(
-             TransformMatchingShapes(grp_fml5b6b[0::3], fmlto6c_1[0]),
-             TransformMatchingShapes(grp_fml5b6b[1::3], fmlto6c_1[1])
+             TransformMatchingShapes(VGroup(grp_fml5b6b[0],grp_fml5b6b[2]), fmlto6c_1[0]),
+             TransformMatchingShapes(VGroup(grp_fml5b6b[1],grp_fml5b6b[3]), fmlto6c_1[1])
              )
         self.wait()
         fmlto6c_2 = MathTex(
              r"{{ v_2 }} ( {{ v_2 t_1 + q - L}})",
              r"={{ v_1 }} ( {{v_1 t_1 - q \cdot \cos \theta}} )",
              font_size=40
-        ).move_to((-2.5,0.2,0))
+        ).move_to((-2.5,0.5,0))
         self.play(
              TransformMatchingTex(fmlto6c_1,fmlto6c_2)
         )    
