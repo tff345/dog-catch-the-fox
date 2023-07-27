@@ -133,13 +133,17 @@ class Tst(Scene):
             r"\cdot q -",r" \frac{m}{1-m^2} \cdot L",
             font_size=36
         ).align_to(fmlto7_5,LEFT)
-        fmlto7_7 = MathTex(
+        fml7 = MathTex(
             "x = ","-",r" \frac{q\cdot\cos\theta + mq}{1-m^2} ",
             "+",r" \frac{mL}{1-m^2}",
             font_size=36
         ).align_to(fmlto7_5,LEFT)
         self.play(TransformMatchingShapes(fmlto7_5,fmlto7_6))
-        self.play(TransformMatchingShapes(fmlto7_6,fmlto7_7,transform_mismatches=True))
-        self.wait()
+        self.play(TransformMatchingShapes(fmlto7_6,fml7,transform_mismatches=True))
+        self.wait(2)
+        self.play(
+            FadeOut(txt_8,shift=UP),
+            FadeOut(fml7,scale=0.4)
+        )
 
         

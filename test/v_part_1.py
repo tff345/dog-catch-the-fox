@@ -128,8 +128,8 @@ class V_P1(Scene):
         txt_6 = mytext(r"消去积分项，我们可以得到<i>t</i>与<i>θ</i>，<i>q</i>的关系").move_to((-2.5,2,0))
         self.play(FadeOut(arr2))
         self.play(
-            FadeOut(fml3_velocity_relation, direction=RIGHT),
-             FadeOut(fml_1_displacement_relation, direction=RIGHT)
+            FadeOut(fml3_velocity_relation, shift=RIGHT),
+             FadeOut(fml_1_displacement_relation, shift=RIGHT)
              )
         
         fml5b6b = MathTex(
@@ -269,11 +269,12 @@ class V_P1(Scene):
             r"\cdot q -",r" \frac{m}{1-m^2} \cdot L",
             font_size=36
         ).align_to(fmlto7_5,LEFT)
-        fmlto7_7 = MathTex(
+        fml7 = MathTex(
             "x = ","-",r" \frac{q\cdot\cos\theta + mq}{1-m^2} ",
             "+",r" \frac{mL}{1-m^2}",
             font_size=36
         ).align_to(fmlto7_5,LEFT)
         self.play(TransformMatchingShapes(fmlto7_5,fmlto7_6))
-        self.play(TransformMatchingShapes(fmlto7_6,fmlto7_7,transform_mismatches=True))
+        self.play(TransformMatchingShapes(fmlto7_6,fml7,transform_mismatches=True))
+        self.play(FadeOut(VGroup(fml7,txt_8),direction=UP))
         self.wait()
