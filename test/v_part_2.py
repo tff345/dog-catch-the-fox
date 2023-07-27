@@ -49,7 +49,7 @@ class Tst(Scene):
 #           FadeOut(fmlto6c_2),
 #           ReplacementTransform(fmlto6c_3,fmlto6c_4))
         fml6c = MathTex(
-            r"t_1=",r"-\frac{v_1 \cos \theta +v_2}{v_2^2-v_1^2} + \frac{v_2}{ v_2^2-v_1^2 } \cdot L",
+            r"t_1=",r"-\frac{v_1 \cos \theta +v_2}{v_2^2-v_1^2} \cdot q + \frac{v_2}{ v_2^2-v_1^2 } \cdot L",
             font_size=40
         ).move_to(fmlto6c_4.get_bottom())
         
@@ -68,26 +68,78 @@ class Tst(Scene):
             font_size=36
             ).move_to(fmlto7)
         fmlto7_2 = MathTex(
-            "{{x_2}}","=","-",r"{{q\cdot \cos x}} ","+","v_1 ","t_1",
+            "{{x}}","=","-",r"{{q\cdot \cos x}} ","+","v_1 ","t_1",
             font_size=36
             ).move_to(fmlto7)
 
         self.play(
-            TransformMatchingTex(fmlto7,fmlto7_1),
+            TransformMatchingTex(fmlto7,fmlto7_1,transform_mismatches=True)
         )
-        self.play(FadeTransform(fmlto7_1,fmlto7_2))
+        self.play(TransformMatchingTex(fmlto7_1,fmlto7_2,key_map={"x_1":"v_1 t_1"}))
         self.play(
             fmlto7_2.animate.move_to((-4,0,0)),
             fml6c.animate.move_to(fmlto7.get_center())
         )
+        
         fmlto7_3 = MathTex(
-            "{{x_2}}","=","-",r"{{q\cdot \cos x}} ","+","v_1 ",
-            r"-\frac{v_1 \cos \theta +v_2}{v_2^2-v_1^2} + \frac{v_2}{ v_2^2-v_1^2 } \cdot L",
+            "{{x}}","=","-",r"{{q\cdot \cos x}} ","+","v_1",
+            r"(-\frac{v_1 \cos \theta +v_2}{v_2^2-v_1^2} \cdot q+ \frac{v_2}{ v_2^2-v_1^2 } \cdot L)",
             font_size=36
-            )
-        fmlto7_3[-1].next_to(fmlto7_2[-2],LEFT)
+            ).align_to(fmlto7_2,LEFT)
+        
         self.play(
-            ReplacementTransform()
+            FadeOut(fml6c),
+            ReplacementTransform(fmlto7_2[-1],fmlto7_3[-2:])
+        )
+        fmlto7_4 = MathTex(
+            "{{x}}","=","-",r"{{q\cdot \cos x}} ",
+            r"-(",r"\frac{v_1^2 \cos \theta +v_1 v_2}{v_2^2-v_1^2}",
+            r" \cdot q+ ",r"\frac{v_1v_2}{ v_2^2-v_1^2 } \cdot L)",
+            font_size=36
+            ).align_to(fmlto7_2,LEFT)
+        self.play(
+            TransformMatchingShapes(fmlto7_2[-3:],fmlto7_4[4:])
+        )
+        txt_6 = mytext(
+            r"消去积分项，我们可以得到<i>t</i>与<i>θ</i>，<i>q</i>的关系"
+            ).move_to((-2.5,2,0))      
+        txt_7 = mytext(
+             "由此，D的横坐标<i>x<sub>2</sub></i>，或<i>x</i>，可以用<i>q</i>，<i>θ</i>表示"
+           ).next_to(txt_6,DOWN)
+        txt_8 =VGroup(
+            Text('这里记',font_size=26),
+            MathTex(r'm=\frac{v_1}{v_2}, m \in (0,1), ',font_size=36),
+            Text('于是有',font_size=26)
+        ).arrange(RIGHT).move_to(txt_7.get_center())
+        
+        self.play(
+            ReplacementTransform(txt_7,txt_8)
         )
         
+        fmlto7_5 = MathTex(
+            "{{x}}","=","-",r"{{q\cdot \cos x}} ",
+            r"-(",r"\frac{m^2 \cos \theta +m}{1-m^2}",
+            r" \cdot q+ ",r"\frac{m}{1-m^2} \cdot L)",
+            font_size=36
+        ).align_to(fmlto7_4,LEFT)
+        self.clear()
+        self.add(txt_8)
+        self.play(
+            TransformMatchingShapes(fmlto7_4,fmlto7_5)
+        )
+        # # #
+        fmlto7_6 = MathTex(
+            "x =",r"- (\cos x+ ",r"\frac{m^2 \cos \theta +m}{1-m^2})",
+            r"\cdot q -",r" \frac{m}{1-m^2} \cdot L",
+            font_size=36
+        ).align_to(fmlto7_5,LEFT)
+        fmlto7_7 = MathTex(
+            "x = ","-",r" \frac{q\cdot\cos\theta + mq}{1-m^2} ",
+            "+",r" \frac{mL}{1-m^2}",
+            font_size=36
+        ).align_to(fmlto7_5,LEFT)
+        self.play(TransformMatchingShapes(fmlto7_5,fmlto7_6))
+        self.play(TransformMatchingShapes(fmlto7_6,fmlto7_7,transform_mismatches=True))
+        self.wait()
+
         
