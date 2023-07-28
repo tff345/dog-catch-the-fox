@@ -61,7 +61,7 @@ class V_P2(Scene):
             font_size=36
             ).move_to(fml3_1)
         
-        fmlto8_1 = MathTex(
+        fmlto8 = MathTex(
             r"\frac{\mathrm{d}}{\mathrm{d}q}(q\cos\theta)",
             "&=",
             r"\frac{v_1-v_2\cos\theta}{v_1\cos\theta-v_2}"r"\\",
@@ -86,6 +86,12 @@ class V_P2(Scene):
             r"\frac{\mathrm{d} q}{q\cdot\mathrm{d} \theta}",
             "&=",
             r"\frac{1}{m}\csc\theta -\cot\theta"r"\\",
+            r"(\frac{1}{m}\csc\theta -\cot\theta)\cdot\mathrm{d} \theta",
+            "&=",
+            r"\frac{\mathrm{d} q}{q}"r"\\",
+            r"\int (\frac{1}{m}\csc\theta -\cot\theta)\cdot\mathrm{d} \theta",
+            "&=",
+            r"\int \frac{\mathrm{d} q}{q}"r"\\",
             font_size=36
         )
         self.add(fml3_2,txt_10,txt_9)
@@ -95,7 +101,7 @@ class V_P2(Scene):
         self.play(
         *[
             ReplacementTransform(
-            VGroup(fml3_2[i],fml3_2[i+3]), fmlto8_1[i].set_y(0),
+            VGroup(fml3_2[i],fml3_2[i+3]), fmlto8[i].set_y(0),
             transform_mismatches=True
             )
          for i in range(0,3)
@@ -105,11 +111,27 @@ class V_P2(Scene):
             self.play(
             *[
             ReplacementTransform(
-            fmlto8_1[i].set_y(0), fmlto8_1[i+3].set_y(0),
+            fmlto8[i].set_y(0), fmlto8[i+3].set_y(0),
             transform_mismatches=True
             )
             for i in range(3*n,3*n+3)
              ]
             )
-        
+        self.play(
+            TransformMatchingShapes(
+            fmlto8[21:24].set_y(0),fmlto8[24:27].set_y(0),
+            transform_mismatches=True
+            )
+        )
+        txt_12 = mytext(r"此时可以对等式两侧同时积分").next_to(txt_9_2,DOWN).align_to(txt_9_1,LEFT)
+        self.play(FadeTransform(txt_11,txt_12))
+        fml8 = fmlto8[27:]
+        self.play(
+            TransformMatchingShapes(
+            fmlto8[24:27].set_y(0),fml8.set_y(0),
+            transform_mismatches=True
+            )
+        )
+        self.play(fml8.animate.move_to(ORIGIN))
+        self.wait()
         
