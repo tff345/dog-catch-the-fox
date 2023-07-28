@@ -3,9 +3,7 @@ from manim import *
 
 class PlotParametricFunction(Scene):
     def func(self, t):
-        def myfunc(x):
-            pm = 0.5
-            pL = 2
+        def myfunc(x, pm=0.5,pL=2):
             x = np.abs(x)
             return -(pL/2*(1-pm))*(x/pL)**(1-pm) + (pL/2*(1+pm))*(x/pL)**(1+pm) + pm*pL/(1-pm**2)
         
@@ -22,7 +20,7 @@ class PlotParametricFunction(Scene):
             r" \\ ",
             r" &\int_{0}^{t_{1}}(v_{1} \cdot \cos \theta )\mathrm{d}t+L = v_{2} t_{1} + q ",
              font_size=36).move_to((3,0.5,0))
-        self.add(fml_1_2)
+        self.add(fml_1_2,func)
 
 
 '''
