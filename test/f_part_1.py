@@ -77,7 +77,6 @@ class V_P1(Scene):
        
         self.play(Unwrite(txt2),run_time=0.8)
         self.play(Unwrite(question),run_time=0.8)
-
         fig_1 = VGroup(ax,curv1,grp_d,grp_d1,grp_f,grp_f1,grp_ang,grp_q,dsd_line)
         self.play(fig_1.animate.scale(0.6).shift(UP*4+RIGHT*4.5))
         self.wait()

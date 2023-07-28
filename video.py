@@ -107,10 +107,10 @@ class V_P1(Scene):
         self.play(Write(txt_4),FadeIn(arr1))
         fml3_velocity_relation = MathTex(
             r'&v_{1} = v_{2}\cdot\cos \theta +\frac{\mathrm{d} (q\cdot \cos q)}{\mathrm{d} t}'
-            r'\\'
+            r'\\',
             r'&v_{1}\cdot\cos \theta = v_{2} + \frac{\mathrm{d} q}{\mathrm{d} t}',
             font_size=36
-            ).move_to((0,-2,0))
+        ).move_to((0,-2,0))
         self.play(Write(fml3_velocity_relation))
         self.play(FadeOut(arr1))
        
@@ -450,7 +450,9 @@ class V_P1(Scene):
             transform_mismatches=True
             )
         )
-        txt12 = mytext(r"此时可以对等式两侧同时积分").next_to(txt9_2,DOWN).align_to(txt9_1,LEFT)
+        txt12 = mytext(
+            r"此时可以对等式两侧同时积分"
+        ).next_to(txt9_2,DOWN).align_to(txt9_1,LEFT)
         self.play(FadeTransform(txt11,txt12))
         fml8 = fmlto8[27:]
         self.play(
@@ -459,32 +461,89 @@ class V_P1(Scene):
             transform_mismatches=True
             )
         )
-        self.play(fml8.animate.move_to(ORIGIN))
+        self.play(fml8.animate.move_to(np.array([-1,0,0])))
         fml9 = MathTex(
-            r"\frac{1}{m}\ln{\lvert\tan\frac{\theta}{2}\rvert}-\ln\lvert\sin\theta \rvert+C_1",
-            "&=",
-            r"\ln q +C_2",
+            r"\frac1m\ln\lvert\tan\frac\theta2\rvert-\ln\lvert\sin\theta\rvert+C_1",
+            "&=",r"\ln q +C_2"
+            r"\\",
+            r"\frac1m\ln(\tan\frac\theta2)-\ln(\sin\theta)",
+            "&=",r"\ln q-\ln L"
+            r"\\",
+            r"e^{\frac1m\ln(\tan\frac\theta2)-\ln(\sin\theta)}",
+            "&=",r"e^{\ln q-\ln L}"
+            r"\\",
+            r"\frac{(\tan\frac\theta2)^{\frac1m}}{\sin\theta}",
+            "&=",r"\frac q L"
+            r"\\",
             font_size=36
+        ).shift(LEFT)
+        self.play(
+            TransformMatchingShapes(fml8, fml9[:3].move_to(fml8))
         )
         txt13 = VGroup(
             mytext(r"利用初值条件，即时间"),
             mytex(r"t=0"),
             mytext(r"时，D与F间距离"),
             mytex(r"q=L"),
-            mytext(r"，且"),
+            mytext(r"且"),
             mytex(r"\theta = \frac \pi 2"),
-            mytext(r"容易解出"),
+            mytext(r"可以解出"),
             mytex(r"C_1 - C_2 = \ln L")
         )
         txt13_1 = txt13[:6].arrange(RIGHT).align_to(txt9,LEFT)
         txt13_2 = txt13[6:].arrange(RIGHT).shift(DOWN*0.6).align_to(txt13_1,LEFT)
-        txt13 = VGroup(txt13_1,txt13_2).next_to(txt9,DOWN)
+        txt13 = VGroup(txt13_1,txt13_2).move_to(txt9)
+        self.play(FadeOut(*[txt12,txt9],shift=UP))
+        self.play(Write(txt13))
+        
+        txt14 = VGroup(
+            mytext(r"同时注意到"),
+            mytex(r"\theta\in(0,\pi),\frac\theta2\in(0,\frac\pi2)\Rightarrow\sin\theta>0,\tan\theta>0"),
+            mytext(r"所以消去绝对值与常数, 化为指数形式")
+        )
+        txt14_1 = txt14[:2].arrange(RIGHT).move_to(txt13.get_bottom()+DOWN*0.5)
+        txt14_2 = txt14[2:].arrange(RIGHT).move_to(txt14_1.get_bottom()+DOWN*0.3).align_to(txt14_1,LEFT)
+        txt14 = VGroup(txt14_1,txt14_2).align_to(txt13,LEFT)
+        self.play(Write(txt14))
+        for n in range(0,3):
+            self.play(
+            *[
+            ReplacementTransform(
+            fml9[i].set_y(0), fml9[i+3].set_y(0),
+            )
+            for i in range(3*n,3*n+3)
+             ]
+            )
+        txt15 = VGroup(
+            mytext(r"因为"),
+            mytex("y"),
+            mytext(r"与"),
+            mytex("q"),
+            mytext(r"的关系为"),
+            mytex(r"y=q\cdot\sin\theta"),
+            mytext(r"，即")
+        ).arrange(RIGHT).move_to(txt13).align_to(txt13,LEFT)
+        txt16 = VGroup(
+            mytext("所以我们想要求的"),
+            mytex(r"q,q\cos\theta"),
+            mytext("可以表示为")
+        ).arrange(RIGHT).move_to(txt15).align_to(txt15,LEFT)
         self.play(
-            Transform(txt12,txt13)
+            FadeOut(*[txt13,txt14],shift=UP),
+            fml9[-4:].animate.scale(0.8).shift(DOWN*3)
         )
         self.play(
-            TransformMatchingShapes(
-            fml8, fml9            
-            )
+            Write(txt15),
+            #FadeIn(fig_1)
+        )
+        fml10 = MathTex(
+            "y",
+            "&=",r"q\cdot\sin\theta"
+            r"\\",
+            "y",
+            "&=",r"L(\tan \frac\theta2)^{\frac1m}"
+            r"\\",
+            font_size=36
         )
         self.wait()
+        
