@@ -62,10 +62,10 @@ class V_P1(Scene):
         self.play(Write(grp_d1), Write(grp_f1))
         self.play(Write(dsd_line))
         self.wait(2)
-        txt_2 = mytext(
+        txt2 = mytext(
             r'设D<sub>1</sub>与F<sub>1</sub>间距离为<i>q</i>，FF<sub>1</sub>与DF夹角为<i>θ</i>，'
             ).shift(UP*1.7)
-        self.play(Write(txt_2))
+        self.play(Write(txt2))
         a = Angle(ax.x_axis, dsd_line, radius=0.3, quadrant=(-1,-1), other_angle=True)
         a_value = MathTex(r"\theta", font_size=26).next_to(a, LEFT*0.6)
         grp_ang = VGroup(a,a_value)
@@ -75,24 +75,24 @@ class V_P1(Scene):
         self.play(FadeIn(grp_q))
         self.play(Write(grp_ang))
        
-        self.play(Unwrite(txt_2),run_time=0.8)
+        self.play(Unwrite(txt2),run_time=0.8)
         self.play(Unwrite(question),run_time=0.8)
 
         fig_1 = VGroup(ax,curv1,grp_d,grp_d1,grp_f,grp_f1,grp_ang,grp_q,dsd_line)
         self.play(fig_1.animate.scale(0.6).shift(UP*4+RIGHT*4.5))
         self.wait()
          
-        txt_3a = mytext('FF<sub>1</sub>方向上的位置关系为 ')
-        txt_3b = mytext("DF<sub>1</sub>方向上的位置关系为 ").next_to(txt_3a,DOWN*3)
-        fml_1a = mytex(r" x_{1} = x_{2} + q\cdot \cos x ").next_to(txt_3a,DOWN)
-        fml_2a = mytex(r" x_{1}' = x_{2}' + q ").next_to(txt_3b,DOWN)
+        txt3a = mytext('FF<sub>1</sub>方向上的位置关系为 ')
+        txt3b = mytext("DF<sub>1</sub>方向上的位置关系为 ").next_to(txt3a,DOWN*3)
+        fml_1a = mytex(r" x_{1} = x_{2} + q\cdot \cos x ").next_to(txt3a,DOWN)
+        fml_2a = mytex(r" x_{1}' = x_{2}' + q ").next_to(txt3b,DOWN)
        
-        self.play(Write(txt_3a),Write(fml_1a))
+        self.play(Write(txt3a),Write(fml_1a))
         self.wait()
-        self.play(Write(txt_3b),Write(fml_2a))
+        self.play(Write(txt3b),Write(fml_2a))
         self.wait()
        
-        self.play(FadeOut(txt_3a),FadeOut(txt_3b))
+        self.play(FadeOut(txt3a),FadeOut(txt3b))
         self.wait()
         fml_1_displacement_relation = MathTex(
             r" x_{1} &= x_{2} + q\cdot \cos x ",
@@ -102,8 +102,8 @@ class V_P1(Scene):
         self.play(ReplacementTransform(VGroup(fml_1a,fml_2a),fml_1_displacement_relation))
         self.wait()
         arr1 = MathTex("\Longleftarrow", font_size=36).rotate(PI/4).move_to((1,-0.5,0))
-        txt_4 = mytext('两式关于时间<i>t</i>求导得到速度关系式').move_to((-3,2.5,0))        
-        self.play(Write(txt_4),FadeIn(arr1))
+        txt4 = mytext('两式关于时间<i>t</i>求导得到速度关系式').move_to((-3,2.5,0))        
+        self.play(Write(txt4),FadeIn(arr1))
         fml3_velocity_relation = MathTex(
             r'&v_{1} = v_{2}\cdot\cos \theta +\frac{\mathrm{d} (q\cdot \cos q)}{\mathrm{d} t}'
             r'\\',
@@ -113,18 +113,18 @@ class V_P1(Scene):
         self.play(Write(fml3_velocity_relation))
         self.play(FadeOut(arr1))
        
-        txt_5 = mytext('同时我们有位置关系的积分表示').next_to(txt_4,DOWN).align_to(txt_4, LEFT)
+        txt5 = mytext('同时我们有位置关系的积分表示').next_to(txt4,DOWN).align_to(txt4, LEFT)
         arr2 = MathTex("\Longleftarrow", font_size=36).move_to((0,0.5,0))
         fml5a6a = MathTex(
         r" & v_1 t_1 = \int_{0}^{t_1}(v_2 \cdot \cos \theta ) \mathrm{d}t +q\cdot\cos\theta \\ ",
         r" & \int_{0}^{t_1}(v_1 \cdot \cos \theta )\mathrm{d}t+L = v_2 t_1 + q ",
         font_size=36
         ).move_to((-3.5,0.4,0))
-        self.play(Write(txt_5), FadeIn(arr2))
+        self.play(Write(txt5), FadeIn(arr2))
         self.play(Write(fml5a6a))
         self.play(FadeOut(fig_1,shift=UR))
         
-        txt_6 = mytext(r"消去积分项，我们可以得到<i>t</i>与<i>θ</i>，<i>q</i>的关系").move_to((-2.5,2,0))
+        txt6 = mytext(r"消去积分项，我们可以得到<i>t</i>与<i>θ</i>，<i>q</i>的关系").move_to((-2.5,2,0))
         self.play(FadeOut(arr2))
         self.play(
             FadeOut(fml3_velocity_relation, scale=0.4),
@@ -143,7 +143,7 @@ class V_P1(Scene):
             TransformMatchingShapes(fml5a6a[1], fml5b6b[2:])
             )
         self.wait()
-        self.play(FadeTransform(VGroup(txt_4,txt_5),txt_6))
+        self.play(FadeTransform(VGroup(txt4,txt5),txt6))
         self.wait()
        
         fmlto6c_1 = MathTex(
@@ -187,13 +187,13 @@ class V_P1(Scene):
          ).move_to(fmlto6c_4.get_bottom())
         self.play(TransformMatchingShapes(fmlto6c_4,fml6c))
        
-        txt_6 = mytext(
+        txt6 = mytext(
             r"消去积分项，我们可以得到<i>t</i>与<i>θ</i>，<i>q</i>的关系"
             ).move_to((-2.5,2,0))      
-        txt_7 = mytext(
+        txt7 = mytext(
              "由此，D的横坐标<i>x<sub>2</sub></i>，或<i>x</i>，可以用<i>q</i>，<i>θ</i>表示"
-           ).next_to(txt_6,DOWN)
-        self.play(FadeTransform(txt_6,txt_7))
+           ).next_to(txt6,DOWN)
+        self.play(FadeTransform(txt6,txt7))
         fmlto7 = MathTex(
            r"{{x_1}}","=","{{x_2}}","+ ",r"{{q\cdot \cos x}} ",
            font_size=36
@@ -243,13 +243,13 @@ class V_P1(Scene):
         )
         self.clear()
         self.add(fmlto7_4)
-        txt_8 =VGroup(
+        txt8 =VGroup(
             Text('这里记',font_size=26),
             MathTex(r'm=\frac{v_1}{v_2}, m \in (0,1), ',font_size=36),
             Text('于是有',font_size=26)
-        ).arrange(RIGHT).move_to(txt_6.get_center())
+        ).arrange(RIGHT).move_to(txt6.get_center())
         self.play(
-           FadeTransform(VGroup(txt_6,txt_7),txt_8)
+           FadeTransform(VGroup(txt6,txt7),txt8)
        )
         fmlto7_5 = MathTex(
             "{{x}}","=","-",r"{{q\cdot \cos x}} ",
@@ -257,7 +257,7 @@ class V_P1(Scene):
             r" \cdot q+ ",r"\frac{m}{1-m^2} \cdot L)",
             font_size=36
         ).align_to(fmlto7_4,LEFT)
-        self.add(txt_8)
+        self.add(txt8)
         self.play(
            ReplacementTransform(fmlto7_4,fmlto7_5)
         )
@@ -277,11 +277,11 @@ class V_P1(Scene):
         self.play(TransformMatchingShapes(fmlto7_6,fml7,transform_mismatches=True))
         self.wait(2)
         self.play(
-            FadeOut(txt_8,shift=UP),
+            FadeOut(txt8,shift=UP),
             FadeOut(fml7,scale=0.4)
         )
         # # # 
-        txt_9 = VGroup(
+        txt9 = VGroup(
             mytext(r"为找出犬D的轨迹方程, 还需找出D的纵坐标"),
             mytex(r"y"),
             mytext(r"与"),
@@ -292,15 +292,15 @@ class V_P1(Scene):
             mytext(r"来表示式中的"),
             mytex(r"q\cdot \cos \theta, q"),
         )
-        txt_9_1 = txt_9[:5].arrange(RIGHT)
-        txt_9_2 = txt_9[5:].arrange(RIGHT).shift(DOWN*0.6).align_to(txt_9_1,LEFT)
-        txt_9 = VGroup(txt_9_1,txt_9_2).shift(UP*3)
-        self.play(Write(txt_9))
+        txt9_1 = txt9[:5].arrange(RIGHT)
+        txt9_2 = txt9[5:].arrange(RIGHT).shift(DOWN*0.6).align_to(txt9_1,LEFT)
+        txt9 = VGroup(txt9_1,txt9_2).shift(UP*3)
+        self.play(Write(txt9))
         self.wait(2)
-        txt_10 = mytext(
+        txt10 = mytext(
             r"由前面的速度关系式可以得到"
-        ).next_to(txt_9_2,DOWN).align_to(txt_9_1,LEFT)
-        self.play(Write(txt_10))      
+        ).next_to(txt9_2,DOWN).align_to(txt9_1,LEFT)
+        self.play(Write(txt10))      
         fml3_1 = MathTex(
             r'\frac{\mathrm{d}}{\mathrm{d}t}(q\cos\theta)&=v_1-v_2\cos\theta'
             r'\\',
@@ -332,7 +332,7 @@ class V_P1(Scene):
             font_size=36
         ).move_to(fml3_2)
         self.clear()
-        self.add(fml3_2,txt_10,txt_9)
+        self.add(fml3_2,txt10,txt9)
         self.play(
         *[
             ReplacementTransform(

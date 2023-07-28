@@ -14,7 +14,7 @@ class V_P2(Scene):
             font_size=36
             ).move_to((0,-2,0))
         # # #
-        txt_9 = VGroup(
+        txt9 = VGroup(
             mytext(r"为找出犬D的轨迹方程, 还需找出D的纵坐标"),
             mytex(r"y"),
             mytext(r"与"),
@@ -25,15 +25,15 @@ class V_P2(Scene):
             mytext(r"来表示式中的"),
             mytex(r"q\cdot \cos \theta, q"),
         )
-        txt_9_1 = txt_9[:5].arrange(RIGHT)
-        txt_9_2 = txt_9[5:].arrange(RIGHT).shift(DOWN*0.6).align_to(txt_9_1,LEFT)
-        txt_9 = VGroup(txt_9_1,txt_9_2).shift(UP*3)
-        self.play(Write(txt_9))
+        txt9_1 = txt9[:5].arrange(RIGHT)
+        txt9_2 = txt9[5:].arrange(RIGHT).shift(DOWN*0.6).align_to(txt9_1,LEFT)
+        txt9 = VGroup(txt9_1,txt9_2).shift(UP*3)
+        self.play(Write(txt9))
         self.wait(2)
-        txt_10 = mytext(
+        txt10 = mytext(
             r"由前面的速度关系式可以得到"
-        ).next_to(txt_9_2,DOWN).align_to(txt_9_1,LEFT)
-        self.play(Write(txt_10))      
+        ).next_to(txt9_2,DOWN).align_to(txt9_1,LEFT)
+        self.play(Write(txt10))      
         fml3_1 = MathTex(
             r'\frac{\mathrm{d}}{\mathrm{d}t}(q\cos\theta)&=v_1-v_2\cos\theta'
             r'\\',
@@ -94,10 +94,10 @@ class V_P2(Scene):
             r"\int \frac{\mathrm{d} q}{q}"r"\\",
             font_size=36
         )
-        self.add(fml3_2,txt_10,txt_9)
+        self.add(fml3_2,txt10,txt9)
         self.wait()
-        txt_11 = mytext(r"化简").next_to(txt_9_2,DOWN).align_to(txt_9_1,LEFT)
-        self.play(FadeTransform(txt_10,txt_11))
+        txt11 = mytext(r"化简").next_to(txt9_2,DOWN).align_to(txt9_1,LEFT)
+        self.play(FadeTransform(txt10,txt11))
         self.play(
         *[
             ReplacementTransform(
@@ -123,8 +123,8 @@ class V_P2(Scene):
             transform_mismatches=True
             )
         )
-        txt_12 = mytext(r"此时可以对等式两侧同时积分").next_to(txt_9_2,DOWN).align_to(txt_9_1,LEFT)
-        self.play(FadeTransform(txt_11,txt_12))
+        txt12 = mytext(r"此时可以对等式两侧同时积分").next_to(txt9_2,DOWN).align_to(txt9_1,LEFT)
+        self.play(FadeTransform(txt11,txt12))
         fml8 = fmlto8[27:]
         self.play(
             TransformMatchingShapes(
@@ -133,5 +133,34 @@ class V_P2(Scene):
             )
         )
         self.play(fml8.animate.move_to(ORIGIN))
+        fml9 = MathTex(
+            r"\frac{1}{m}\ln{\lvert\tan\frac{\theta}{2}\rvert}-\ln\lvert\sin\theta \rvert+C_1",
+            "&=",
+            r"\ln q +C_2",
+            font_size=36
+        )
+        txt13 = VGroup(
+            mytext(r"利用初值条件，即时间"),
+            mytex(r"t=0"),
+            mytext(r"时，D与F间距离"),
+            mytex(r"q=L"),
+            mytext(r"，且"),
+            mytex(r"\theta = \frac \pi 2"),
+            mytext(r"容易解出"),
+            mytex(r"C_1 - C_2 = \ln L")
+        )
+        txt13_1 = txt13[:6].arrange(RIGHT).align_to(txt9,LEFT)
+        txt13_2 = txt13[6:].arrange(RIGHT).shift(DOWN*0.6).align_to(txt13_1,LEFT)
+        txt13 = VGroup(txt13_1,txt13_2).next_to(txt9,DOWN)
+        self.play(
+            Transform(txt12,txt13)
+        )
+        self.play(
+            TransformMatchingShapes(
+            fml8, fml9            
+            )
+        )
+        
+
         self.wait()
         
