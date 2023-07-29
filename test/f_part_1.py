@@ -10,18 +10,28 @@ class V_P1(Scene):
         
         def mytex(content):
             return MathTex(content,font_size=36)
-        
+    
        # show question
-        question =  MarkupText(
-            r"一狐F以恒速<i>v<sub>1</sub></i>沿<i>x</i>轴逃跑，一犬以恒速<i>v<sub>2</sub></i>追击，速度方向始终对准狐. <i>t=0 </i>时刻，"
-            "\n""\n"
-            r"狐在<i>x</i>轴上的F处，犬在D处，且DF⊥<i>x</i>轴，DF=L，设<i>v<sub>2</sub>>v<sub>1</sub></i>，求犬的轨迹方程.",
-            justify=True
-            )
-       
-        question.set_color(YELLOW).scale(0.5).shift(UP*3)
+
+        question = VGroup(
+            mytext("一狐"),mytex("F"),mytext("以恒速"),mytex("v_1"),
+            mytext("沿"),mytex("x"),mytext("轴逃跑，一犬以恒速"),mytex("v_2"),
+            mytext("追击，速度方向始终对准狐."),
+            mytex("t=0"),
+            mytext("时刻，"),
+            mytext("狐在"),mytex("x"),mytext("轴上的"),mytex("F"),mytext("处，犬在"),
+            mytex("D"),mytext("处，且"),mytex(r"DF\bot x"),mytext("轴，"),
+            mytex("DF = L."),mytext("设"),mytex("v_2 > v_1"),
+            mytext("，求犬的轨迹方程.")
+        )
+        qstn1 = question[:9].arrange(RIGHT).move_to((0,3,0))
+        qstn2 = question[9:21].arrange(RIGHT).move_to(qstn1.get_bottom()+DOWN*0.3).align_to(qstn1,LEFT)
+        qstn3 = question[21:].arrange(RIGHT).move_to(qstn2.get_bottom()+DOWN*0.3).align_to(qstn2,LEFT)
+        question = VGroup(qstn1, qstn2, qstn3)
+        question.set_color(YELLOW)
         self.play(Write(question), run_time=3)
          # draw the figure
+        
         ax = Axes(x_range=(-0.5, 3), 
                   y_range=(0, 3),
                   x_length=7,
@@ -36,15 +46,15 @@ class V_P1(Scene):
         dot_fox = Dot(ax.coords_to_point(0, 0), color=ORANGE)
         dot_d1 = Dot(ax.coords_to_point(0.5, 0.446), color=GRAY_BROWN)
         dot_f1 = Dot(ax.coords_to_point(0.79, 0), color=ORANGE)
-        mrk_d = mytext("D").next_to(dot_dog, UR*0.6)
-        mrk_d1 = mytext("D<sub>1</sub>").next_to(dot_d1, UP*0.6)
-        mrk_f = mytext("F").next_to(dot_fox, UL*0.6)
-        mrk_f1= mytext("F<sub>1</sub>").next_to(dot_f1, DOWN*0.6)
+        mrk_d = mytex("D").next_to(dot_dog, UR*0.6)
+        mrk_d1 = mytex("D_1").next_to(dot_d1, UP*0.6)
+        mrk_f = mytex("F").next_to(dot_fox, UL*0.6)
+        mrk_f1= mytex("F_1").next_to(dot_f1, DOWN*0.6)
  
         arrow_d = Vector([0,-0.6]).next_to(dot_dog, LEFT) 
         arrow_f = Vector([0.4,0]).next_to(dot_fox, DOWN) 
-        mrk_v1 = mytext("<i>v<sub>1</sub></i>").next_to(arrow_f, DOWN)
-        mrk_v2 = mytext("<i>v<sub>2</sub></i>").next_to(arrow_d, LEFT)
+        mrk_v1 = mytex("v_1").next_to(arrow_f, DOWN)
+        mrk_v2 = mytex("v_2").next_to(arrow_d, LEFT)
         # show the simulated curve
         func = lambda x : -np.log(x+0.14)
         curv1 = ax.plot(func, [0,0.5], use_vectorized=True)
@@ -65,6 +75,11 @@ class V_P1(Scene):
         txt2 = mytext(
             r'设D<sub>1</sub>与F<sub>1</sub>间距离为<i>q</i>，FF<sub>1</sub>与DF夹角为<i>θ</i>，'
             ).shift(UP*1.7)
+        txt2 = VGroup(
+            mytext("设"),mytex("D_1"),mytext("与"),mytext("F_1"),
+            mytext("间距离为"),mytex(r"q,\:FF_1"),mytext("与"),mytex("DF"),
+            mytext("夹角为"), mytex(r"\theta")
+        ).arrange(RIGHT).next_to(question.get_bottom(),DOWN)
         self.play(Write(txt2))
         a = Angle(ax.x_axis, dsd_line, radius=0.3, quadrant=(-1,-1), other_angle=True)
         a_value = MathTex(r"\theta", font_size=26).next_to(a, LEFT*0.6)
@@ -78,13 +93,15 @@ class V_P1(Scene):
         self.play(Unwrite(txt2),run_time=0.8)
         self.play(Unwrite(question),run_time=0.8)
         fig_1 = VGroup(ax,curv1,grp_d,grp_d1,grp_f,grp_f1,grp_ang,grp_q,dsd_line)
-        self.play(fig_1.animate.scale(0.6).shift(UP*4+RIGHT*4.5))
+        self.play(fig_1.animate.scale(0.6).shift(UP*4+RIGHT*5))
         self.wait()
-         
+        # # # 
+        
+        self.next_section("section_0")
         txt3a = mytext('FF<sub>1</sub>方向上的位置关系为 ')
         txt3b = mytext("DF<sub>1</sub>方向上的位置关系为 ").next_to(txt3a,DOWN*3)
-        fml_1a = mytex(r" x_{1} = x_{2} + q\cdot \cos x ").next_to(txt3a,DOWN)
-        fml_2a = mytex(r" x_{1}' = x_{2}' + q ").next_to(txt3b,DOWN)
+        fml_1a = mytex(r" x_1 = x_2 + q\cdot \cos x ").next_to(txt3a,DOWN)
+        fml_2a = mytex(r" x_1' = x_2' + q ").next_to(txt3b,DOWN)
        
         self.play(Write(txt3a),Write(fml_1a))
         self.wait()
@@ -94,9 +111,9 @@ class V_P1(Scene):
         self.play(FadeOut(txt3a),FadeOut(txt3b))
         self.wait()
         fml_1_displacement_relation = MathTex(
-            r" x_{1} &= x_{2} + q\cdot \cos x ",
+            r" x_1 &= x_2 + q\cdot \cos x ",
             r"\\",          
-            r" x_{1}' &= x_{2}' + q ",font_size=40
+            r" x_1' &= x_2' + q ",font_size=40
             ).move_to((3,0.5,0))
         self.play(ReplacementTransform(VGroup(fml_1a,fml_2a),fml_1_displacement_relation))
         self.wait()
@@ -104,14 +121,14 @@ class V_P1(Scene):
         txt4 = mytext('两式关于时间<i>t</i>求导得到速度关系式').move_to((-3,2.5,0))        
         self.play(Write(txt4),FadeIn(arr1))
         fml3_velocity_relation = MathTex(
-            r'&v_{1} = v_{2}\cdot\cos \theta +\frac{\mathrm{d} (q\cdot \cos q)}{\mathrm{d} t}'
+            r'&v_1 = v_2\cdot\cos \theta +\frac{\mathrm{d} (q\cdot \cos q)}{\mathrm{d} t}'
             r'\\',
-            r'&v_{1}\cdot\cos \theta = v_{2} + \frac{\mathrm{d} q}{\mathrm{d} t}',
+            r'&v_1\cdot\cos \theta = v_2 + \frac{\mathrm{d} q}{\mathrm{d} t}',
             font_size=36
         ).move_to((0,-2,0))
         self.play(Write(fml3_velocity_relation))
         self.play(FadeOut(arr1))
-       
+        """
         txt5 = mytext('同时我们有位置关系的积分表示').next_to(txt4,DOWN).align_to(txt4, LEFT)
         arr2 = MathTex("\Longleftarrow", font_size=36).move_to((0,0.5,0))
         fml5a6a = MathTex(
@@ -262,6 +279,8 @@ class V_P1(Scene):
         )
         self.wait() 
         # # # 
+        self.next_section("section_1")
+
         fmlto7_6 = MathTex(
             "x =",r"- (\cos x+ ",r"\frac{m^2 \cos \theta +m}{1-m^2})",
             r"\cdot q -",r" \frac{m}{1-m^2} \cdot L",
@@ -277,11 +296,12 @@ class V_P1(Scene):
         self.wait(2)
         self.play(
             FadeOut(txt8,shift=UP),
-            FadeOut(fml7,scale=0.4)
+            fml7.animate.scale(0.7).move_to((-4,-3,0))
         )
+        
         # # # 
         txt9 = VGroup(
-            mytext(r"为找出犬D的轨迹方程, 还需找出D的纵坐标"),
+            mytext(r"为求出犬D的轨迹方程, 还需找出D的纵坐标"),
             mytex(r"y"),
             mytext(r"与"),
             mytex(r"q, \theta"),
@@ -295,50 +315,4 @@ class V_P1(Scene):
         txt9_2 = txt9[5:].arrange(RIGHT).shift(DOWN*0.6).align_to(txt9_1,LEFT)
         txt9 = VGroup(txt9_1,txt9_2).shift(UP*3)
         self.play(Write(txt9))
-        self.wait(2)
-        txt10 = mytext(
-            r"由前面的速度关系式可以得到"
-        ).next_to(txt9_2,DOWN).align_to(txt9_1,LEFT)
-        self.play(Write(txt10))      
-        fml3_1 = MathTex(
-            r'\frac{\mathrm{d}}{\mathrm{d}t}(q\cos\theta)&=v_1-v_2\cos\theta'
-            r'\\',
-            r'\frac{\mathrm{d} q}{\mathrm{d} t} &= v_1\cos \theta - v_2',
-            font_size=36
-            ).move_to(fml3_velocity_relation)
-        self.play(SpinInFromNothing(fml3_velocity_relation))
-        self.wait()
-        self.play(
-        *[
-            TransformMatchingShapes(
-            fml3_velocity_relation[i], fml3_1[i],
-            transform_mismatches=True,path_arc=90 * DEGREES)
-         for i in [0,1]
-         ]
-        )
-        fml3_2 = MathTex(
-            r"\frac{\mathrm{d}}{\mathrm{d}t}(q\cos\theta)","&=",
-            r"v_1-v_2\cos\theta"r'\\',
-            r"\frac{\mathrm{d} q}{\mathrm{d} t}","&=",
-            r"v_1\cos \theta - v_2",
-            font_size=36
-            ).move_to(fml3_1)
-        fml3_1.become(fml3_2)
-        fmlto8_1 = MathTex(
-            r"\frac{\mathrm{d}}{\mathrm{d}q}(q\cos\theta)",
-            "=",
-            r"\frac{v_1-v_2\cos\theta}{v_1\cos\theta-v_2}",
-            font_size=36
-        ).move_to(fml3_2)
-        self.clear()
-        self.add(fml3_2,txt10,txt9)
-        self.play(
-        *[
-            ReplacementTransform(
-            VGroup(fml3_2[i],fml3_2[i+3]), fmlto8_1[i],
-            transform_mismatches=True
-            )
-         for i in range(0,3)
-         ]
-        )
-        self.wait()
+        """

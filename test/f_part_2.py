@@ -3,6 +3,7 @@ from manim import *
 
 class V_P2(Scene):
     def construct(self):
+        self.next_section("0")
         self.camera.background_color = "#333233"
         def mytex(content):
             return MathTex(content,font_size=36)
@@ -15,6 +16,12 @@ class V_P2(Scene):
             r'&v_1\cdot\cos \theta = v_2 + \frac{\mathrm{d} q}{\mathrm{d} t}',
             font_size=36
             ).move_to((0,-2,0))
+        fml7 = MathTex(
+            "x = ","-",r" \frac{q\cdot\cos\theta + mq}{1-m^2} ",
+            "+",r" \frac{mL}{1-m^2}",
+            font_size=36
+        )
+        fml7.scale(0.7).move_to((-4,-3,0))
         # # #
         txt9 = VGroup(
             mytext(r"为求出犬D的轨迹方程, 还需找出D的纵坐标"),
@@ -203,6 +210,7 @@ class V_P2(Scene):
             mytex(r"q,q\cos\theta"),
             mytext("可以表示为")
         ).arrange(RIGHT).move_to(txt15).align_to(txt15,LEFT)
+        self.next_section("1")
         self.play(
             FadeOut(*[txt13,txt14],shift=UP),
             fml9[-4:].animate.scale(0.8).shift(DOWN*3)
@@ -218,7 +226,89 @@ class V_P2(Scene):
             "y",
             "&=",r"L(\tan \frac\theta2)^{\frac1m}"
             r"\\",
+            r"\tan\frac\theta2",
+            "&=",r"{(\frac yL)}^m",
             font_size=36
         )
+        self.play(
+            TransformFromCopy(txt15[5],fml10[:3].set_y(0))
+        )
+        self.play(
+        *[
+            ReplacementTransform(
+            fml10[i].set_y(0), fml10[i+3].set_y(0),
+            transform_mismatches=True
+            )
+         for i in range(0,3)
+         ]
+        )
+        self.play(TransformMatchingShapes(fml10[3:6].set_y(0),fml10[6:9].set_y(0)))
+        self.play(
+            fml10[6:9].animate.move_to(fml9[-4:]),
+            FadeOut(fml9[-4:],shift=DOWN)
+        )
+        self.play(TransformMatchingShapes(txt15,txt16))
+        fml_triangle = MathTex(
+            r"\sin\theta&=\frac{2\tan\frac\theta2}{1+\tan^2\frac\theta2}"
+            r"\\"
+            r"\tan\theta&=\frac{2\tan\frac\theta2}{1-\tan^2\frac\theta2}",
+            font_size=30,
+        ).move_to((3,0,0))
+        fmlto11 = MathTex(
+            "q","&=",
+            r"\frac y{\sin\theta}"r"\\"r"\\",
+            r"q\cos\theta","&=",
+            r"\frac y{\sin\theta}\cos\theta"r"\\",
+            "q","&=",
+            r"\frac y{\sin\theta}"r"\\"r"\\",
+            r"q\cos\theta","&=",
+            r"\frac y{\tan\theta}"r"\\",# # #
+            "q","&=",
+            r"y\cdot\frac{1+\tan^2\frac\theta2}{2\tan\frac\theta2}"r"\\",
+            r"q\cos\theta","&=",
+            r"y\cdot\frac{1-\tan^2\frac\theta2}{2\tan\frac\theta2}"r"\\",
+            "q","&=",
+            r"\frac y2\left(\left(\frac yL\right)^{-m}+\left(\frac yL\right)^{m}\right)"r"\\",
+            r"q\cos\theta","&=",
+            r"\frac y2\left(\left(\frac yL\right)^{-m}-\left(\frac yL\right)^{m}\right)"r"\\",
+            "q","&=",
+            r"\frac L2\left(\left(\frac yL\right)^{1-m}+\left(\frac yL\right)^{1+m}\right)"r"\\",
+            r"q\cos\theta","&=",
+            r"\frac L2\left(\left(\frac yL\right)^{1-m}-\left(\frac yL\right)^{1+m}\right)"r"\\",
+            font_size = 36
+        ).move_to((-3,-1,0))
+        self.play(Write(fmlto11[:6].set_y(0)))
+        self.play(
+            *[
+            TransformMatchingShapes(
+            fmlto11[i], fmlto11[i+6].set_y(fmlto11[i].get_y()),
+            transform_mismatches=True
+            )
+         for i in range(0,6)
+         ]
+        )
+        framebox = SurroundingRectangle(fml_triangle, buff =.2)
+        txt17 = mytext("利用三角万能公式可以得到").move_to(txt16)
+        self.play(
+            Write(fml_triangle),
+            Transform(txt16,txt17),
+            Create(framebox)
+        )
+        self.play(FadeOut(framebox))
+        for n in range(1,4):
+            self.play(
+                *[
+                TransformMatchingShapes(
+                fmlto11[i],fmlto11[i+6].set_y(fmlto11[i].get_y()),
+                transform_mismatches=True
+                )
+                for i in range(6*n,6*n+6)
+                ]
+            )
+        self.play(
+            Unwrite(fml_triangle),
+            fmlto11[-6:].animate.move_to(fml_triangle)
+        )
+        txt18 = mytext("带入前式，得到")
         self.wait()
         
