@@ -320,32 +320,24 @@ class V_P1(Scene):
         ).next_to(txt9_2,DOWN).align_to(txt9_1,LEFT)
         self.play(Write(txt10))      
         fml3_1 = MathTex(
-            r'\frac{\mathrm{d}}{\mathrm{d}t}(q\cos\theta)&=v_1-v_2\cos\theta'
-            r'\\',
-            r'\frac{\mathrm{d} q}{\mathrm{d} t} &= v_1\cos \theta - v_2',
-            font_size=36
-            ).move_to(fml3_velocity_relation).shift(UP)
-        self.play(SpinInFromNothing(fml3_velocity_relation.shift(UP)))
-        self.wait()
-        self.play(
-        *[
-            TransformMatchingShapes(
-            fml3_velocity_relation[i], fml3_1[i],
-            transform_mismatches=True,path_arc=90 * DEGREES)
-         for i in [0,1]
-         ]
-        )
-        self.clear()
-        # 能否去掉fml3_1?
-        fml3_2 = MathTex(
             r"\frac{\mathrm{d}}{\mathrm{d}t}(q\cos\theta)","&=",
             r"v_1-v_2\cos\theta"
             r'\\',
             r"\frac{\mathrm{d} q}{\mathrm{d} t}","&=",
             r"v_1\cos \theta - v_2",
             font_size=36
-            ).move_to(fml3_1)
-        
+            ).move_to(fml3_velocity_relation).shift(UP)
+        self.play(SpinInFromNothing(fml3_velocity_relation.shift(UP)))
+        self.wait()
+        self.play(
+        *[
+            ReplacementTransform(
+            fml3_velocity_relation[i], fml3_1[:3*i+3],
+            transform_mismatches=True
+            )
+         for i in [0,1]
+        ]
+        )
         fmlto8 = MathTex(
             r"\frac{\mathrm{d}}{\mathrm{d}q}(q\cos\theta)",
             "&=",
@@ -379,14 +371,13 @@ class V_P1(Scene):
             r"\int \frac{\mathrm{d} q}{q}"r"\\",
             font_size=36
         )
-        self.add(fml3_2,txt10,txt9)
         self.wait()
         txt11 = mytext(r"化简").next_to(txt9_2,DOWN).align_to(txt9_1,LEFT)
         self.play(FadeTransform(txt10,txt11))
         self.play(
         *[
             ReplacementTransform(
-            VGroup(fml3_2[i],fml3_2[i+3]), fmlto8[i].set_y(0),
+            VGroup(fml3_1[i],fml3_1[i+3]), fmlto8[i].set_y(0),
             transform_mismatches=True
             )
          for i in range(0,3)
@@ -500,10 +491,10 @@ class V_P1(Scene):
             "&=",r"q\cdot\sin\theta"
             r"\\",
             "y",
-            "&=",r"L(\tan \frac\theta2)^{\frac1m}"
+            "&=",r"L\left(\tan \frac\theta2\right)^{\frac1m}"
             r"\\",
             r"\tan\frac\theta2",
-            "&=",r"{(\frac yL)}^m",
+            "&=",r"{\left(\frac yL\right)}^m",
             font_size=36
         )
         self.play(
@@ -520,8 +511,8 @@ class V_P1(Scene):
         )
         self.play(TransformMatchingShapes(fml10[3:6].set_y(0),fml10[6:9].set_y(0)))
         self.play(
+            FadeOut(fml9[-4:],shift=DOWN),
             fml10[6:9].animate.move_to(fml9[-4:]),
-            FadeOut(fml9[-4:],shift=DOWN)
         )
         self.play(TransformMatchingShapes(txt15,txt16))
         fml_triangle = MathTex(
@@ -567,7 +558,7 @@ class V_P1(Scene):
         txt17 = mytext("利用三角万能公式可以得到").move_to(txt16)
         self.play(
             Write(fml_triangle),
-            Transform(txt16,txt17),
+            FadeTransform(txt16,txt17),
             Create(framebox)
         )
         self.play(FadeOut(framebox))
@@ -581,5 +572,34 @@ class V_P1(Scene):
                 for i in range(6*n,6*n+6)
                 ]
             )
-        self.play(Unwrite(fml_triangle))
+        self.play(
+            FadeOut(fml_triangle,shift=RIGHT),
+            fmlto11[-6:].animate.scale(0.8).move_to(
+            fml_triangle.get_center()+(1,0,0)
+            )
+        )
+        txt18 = mytext("带入前式，化简得到").move_to(txt17)
+        self.play(
+            TransformMatchingShapes(txt17,txt18),
+            FadeOut(fml10[6:9],shift=DOWN),
+            fml7.animate.scale(1.43).move_to((-2,0,0))
+        )
+        fml11 = MathTex(
+            "x","&=",
+            r"\frac{q\cdot\cos\theta + mq}{1-m^2}+\frac{mL}{1-m^2}"r"\\",
+            "x","&=",
+            r"-\frac L{2\left( 1-m\right)}\left(\frac yL\right)^{1-m}+\frac L{2\left(1+m\right)}\left(\frac yL\right)^{1+m}+\frac{mL}{1-m^2}"
+            r"\\",
+            font_size=36
+        )
+        fml11_1 = fml11[:3].move_to(fml7)
+        fml12 = fml11[3:].set_y(0)
+        self.play(
+            Transform(fml7,fml11_1),
+            FadeOut(fmlto11[-6:],shift=RIGHT)
+        )
+        self.play(
+            FadeTransform(fml7,fml12)
+        )
         self.wait()
+        

@@ -43,7 +43,7 @@ class V_P2(Scene):
             r"由前面的速度关系式可以得到"
         ).next_to(txt9_2,DOWN).align_to(txt9_1,LEFT)
         self.play(Write(txt10))      
-        fml3_2 = MathTex(
+        fml3_1 = MathTex(
             r"\frac{\mathrm{d}}{\mathrm{d}t}(q\cos\theta)","&=",
             r"v_1-v_2\cos\theta"
             r'\\',
@@ -56,14 +56,12 @@ class V_P2(Scene):
         self.play(
         *[
             ReplacementTransform(
-            fml3_velocity_relation[i], fml3_2[:3*i+3],
+            fml3_velocity_relation[i], fml3_1[:3*i+3],
             transform_mismatches=True
             )
          for i in [0,1]
         ]
         )
-        # 能否去掉fml3_1?
-        
         fmlto8 = MathTex(
             r"\frac{\mathrm{d}}{\mathrm{d}q}(q\cos\theta)",
             "&=",
@@ -103,7 +101,7 @@ class V_P2(Scene):
         self.play(
         *[
             ReplacementTransform(
-            VGroup(fml3_2[i],fml3_2[i+3]), fmlto8[i].set_y(0),
+            VGroup(fml3_1[i],fml3_1[i+3]), fmlto8[i].set_y(0),
             transform_mismatches=True
             )
          for i in range(0,3)
