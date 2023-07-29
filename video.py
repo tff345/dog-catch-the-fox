@@ -38,7 +38,8 @@ class V_P1(Scene):
                   axis_config={
                       'include_ticks' : False,
                       'tip_shape': StealthTip
-                      }).move_to((-1, -1, 0))
+                      }
+        ).move_to((-1, -1, 0))
        
         self.play(Create(ax))
         dot_dog = Dot(ax.coords_to_point(0, 2), color=GRAY_BROWN)
@@ -278,7 +279,7 @@ class V_P1(Scene):
         )
         self.wait() 
         # # # 
-        self.next_section("section_1",skip_animations=True)
+        self.next_section("section_1")
 
         fmlto7_6 = MathTex(
             "x =",r"- (\cos x+ ",r"\frac{m^2 \cos \theta +m}{1-m^2})",
@@ -484,7 +485,7 @@ class V_P1(Scene):
         )
         self.play(
             Write(txt15),
-            #FadeIn(fig_1)
+            FadeIn(fig_1)
         )
         fml10 = MathTex(
             "y",
