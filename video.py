@@ -137,8 +137,8 @@ class V_P1(Scene):
         txt5 = mytext('同时我们有位置关系的积分表示').next_to(txt4,DOWN).align_to(txt4, LEFT)
         arr2 = MathTex("\Longleftarrow", font_size=36).move_to((0,0.5,0))
         fml4_v_int = MathTex(
-        " & v_1 t_1 ","=",r"\int_{0}^{t_1}(v_2 \cdot \cos \theta ) \mathrm{d}t +q\cdot\cos\theta \\ ",
-        r" & \int_{0}^{t_1}(v_1 \cdot \cos \theta )\mathrm{d}t+L","=","v_2 t_1 + q ",
+        " & v_1 t_1 ","=",r"\int_{0}^{t_1}\left(v_2 \cdot \cos \theta\right) \mathrm{d}t +q\cdot\cos\theta \\ ",
+        r" & \int_{0}^{t_1}\left(v_1 \cdot \cos \theta\right)\mathrm{d}t+L","=","v_2 t_1 + q ",
         font_size=36
         ).move_to((-3.5,0.5,0))
         self.play(Write(txt5), Write(arr2))
@@ -146,6 +146,7 @@ class V_P1(Scene):
         
         self.wait()
         self.play(Uncreate(arr2))
+        self.wait()
         self.play(
             FadeOut(fml3_velocity_relation, scale=0.4),
             FadeOut(fml1_displacement_relation, scale=0.4)
@@ -219,6 +220,7 @@ class V_P1(Scene):
             SpinInFromNothing(fmlto7_1[:6].set_y(fml6.get_y()))
         )
         self.play(Indicate(fmlto7_1[:6]))
+        self.wait()
         self.play(
             TransformMatchingShapes(
             fmlto7_1[:6],fmlto7_1[6:13].set_y(fml6.get_y()),
@@ -440,6 +442,7 @@ class V_P1(Scene):
         txt14_2 = txt14[2:].arrange(RIGHT).move_to(txt14_1.get_bottom()+DOWN*0.3).align_to(txt14_1,LEFT)
         txt14 = VGroup(txt14_1,txt14_2).align_to(txt13,LEFT)
         self.play(Write(txt14))
+        self.wait(2)
         for n in range(0,3):
             self.play(
             *[
@@ -449,6 +452,7 @@ class V_P1(Scene):
             for i in range(3*n,3*n+3)
              ]
             )
+        self.wait(2)
         txt15 = VGroup(
             mytext(r"因为"),
             mytex("y"),
@@ -499,6 +503,7 @@ class V_P1(Scene):
          ]
         )
         self.play(TransformMatchingShapes(fml10[3:6].set_y(0),fml10[6:9].set_y(0)))
+        self.wait()
         self.play(
             FadeOut(fml9[-4:],shift=DOWN),
             fml10[6:9].animate.move_to(fml9[-4:]),
@@ -518,7 +523,7 @@ class V_P1(Scene):
             "q","&=",
             r"\frac y{\sin\theta}"r"\\"r"\\",
             r"q\cos\theta","&=",
-            r"\frac y{\tan\theta}"r"\\",# # #
+            r"\frac y{\tan\theta}"r"\\",
             "q","&=",
             r"y\cdot\frac{1+\tan^2\frac\theta2}{2\tan\frac\theta2}"r"\\",
             r"q\cos\theta","&=",
@@ -551,6 +556,7 @@ class V_P1(Scene):
             Create(framebox)
         )
         self.play(FadeOut(framebox))
+        self.wait(2)
         for n in range(1,4):
             self.play(
                 *[
@@ -573,6 +579,7 @@ class V_P1(Scene):
             FadeOut(fml10[6:9],shift=DOWN),
             fml7.animate.scale(1.43).move_to((-2,0,0))
         )
+        self.wait()
         fml11 = MathTex(
             "x","&=",
             r"\frac{q\cdot\cos\theta + mq}{1-m^2}+\frac{mL}{1-m^2}"r"\\",
@@ -590,4 +597,6 @@ class V_P1(Scene):
         self.play(
             FadeTransform(fml7,fml12)
         )
-        self.wait()
+        self.play(fml12.animate.move_to((0,-2,0)))
+        self.wait(2)
+
