@@ -59,7 +59,8 @@ class V_P1(Scene):
         mrk_v2 = mytex("v_2").next_to(arrow_d, LEFT)
         # show the simulated curve
         func = lambda x : -np.log(x+0.14)
-        curv1 = ax.plot(func, [0,0.5], use_vectorized=True)
+        curv1 = ax.plot(func,[0,0.5],stroke_width=2.5,use_vectorized=True)
+
         # add parameters
         dsd_line = DashedLine(dot_d1.get_center(),dot_f1.get_center())
         # anim_1
@@ -548,14 +549,14 @@ class V_P1(Scene):
          for i in range(0,6)
          ]
         )
-        framebox = SurroundingRectangle(fmltriangle, buff =.2)
+        framebox1 = SurroundingRectangle(fmltriangle, buff =.2)
         txt17 = mytext("利用三角万能公式可以得到").move_to(txt16)
         self.play(
             Write(fmltriangle),
             FadeTransform(txt16,txt17),
-            Create(framebox)
+            Create(framebox1)
         )
-        self.play(FadeOut(framebox))
+        self.play(FadeOut(framebox1))
         self.wait(2)
         for n in range(1,4):
             self.play(
@@ -597,6 +598,18 @@ class V_P1(Scene):
         self.play(
             FadeTransform(fml7,fml12)
         )
-        self.play(fml12.animate.move_to((0,-2,0)))
-        self.wait(2)
+        txt19 = VGroup(
+            mytext("式中"), mytex(r"m=\frac{v_1}{v_2},\: L"),mytext("为"),
+            mytex(r"\overrightarrow{v_1},\: \overrightarrow{v_2}"),
+            mytext("相垂直时点"),mytex(r"D,\: F"),mytext("间的距离")
+        ).arrange(RIGHT).next_to(fml12,DOWN*1.5)
+        self.play(Write(txt19))
+        self.wait()
+        framebox2 = SurroundingRectangle(fml12, buff =.3)
+        self.play(Create(framebox2))
+        self.play(FadeOut(framebox2))
+        self.play(
+            FadeOut(*[fig_1,txt18,txt19],shift=UP),
+            fml12.animate.move_to((0,-2,0)),
+        )
 

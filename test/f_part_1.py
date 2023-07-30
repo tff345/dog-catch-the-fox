@@ -59,7 +59,7 @@ class V_P1(Scene):
         mrk_v2 = mytex("v_2").next_to(arrow_d, LEFT)
         # show the simulated curve
         func = lambda x : -np.log(x+0.14)
-        curv1 = ax.plot(func, [0,0.5], use_vectorized=True)
+        curv1 = ax.plot(func, [0,0.5], stroke_width=2.5,use_vectorized=True)
         # add parameters
         dsd_line = DashedLine(dot_d1.get_center(),dot_f1.get_center())
         # anim_1
@@ -591,3 +591,6 @@ class V_P1(Scene):
             FadeTransform(fml7,fml12)
         )
         self.wait()
+        self.play(
+            FadeOut(*[txt18,fig_1])
+        )
