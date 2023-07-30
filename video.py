@@ -1,7 +1,7 @@
 from manim import *
 
 
-# f_part_1:
+# video
 class V_P1(Scene):     
     def construct(self):
         self.camera.background_color = "#333233"
@@ -101,7 +101,7 @@ class V_P1(Scene):
             mytext("设"),mytex("FF_1"),mytext("方向上的位置关系为")
         ).arrange(RIGHT)
         txt3_2 = VGroup(
-            mytex("DF_1"),mytext("方向上的位置关系为")
+            mytex("D_1F_1"),mytext("方向上的位置关系为")
         ).arrange(RIGHT).next_to(txt3_1,DOWN*3).align_to(txt3_1,LEFT)
         fml1a = mytex(r" x_1 = x_2 + q\cdot \cos \theta ").next_to(txt3_1,DOWN)
         fml2a = mytex(r" x_1' = x_2' + q ").next_to(txt3_2,DOWN)
@@ -223,15 +223,15 @@ class V_P1(Scene):
         self.wait()
         self.play(
             TransformMatchingShapes(
-            fmlto7_1[:6],fmlto7_1[6:13].set_y(fml6.get_y()),
+            fmlto7_1[:6],fmlto7_1[6:12].set_y(fml6.get_y()),
             transform_mismatches=True)
         )
         self.play(
-            ReplacementTransform(fmlto7_1[6:13],fmlto7_1[13:].set_y(fml6.get_y()))
+            ReplacementTransform(fmlto7_1[6:12],fmlto7_1[12:].set_y(fml6.get_y()))
             )
         self.play(
-            fmlto7_1[13:].animate.align_to(fml6,LEFT),
-            fml6.animate.align_to(fmlto7_1[6:13],RIGHT)
+            fmlto7_1[12:].animate.align_to(fml6,LEFT),
+            fml6.animate.align_to(fmlto7_1[6:12],RIGHT)
         )
 
         fmlto7_2 = MathTex(
@@ -248,11 +248,11 @@ class V_P1(Scene):
             "x ","&= ",r"-\frac{q\cdot\cos\theta + mq}{1-m^2}" # fml7
             r"+\frac{mL}{1-m^2}\\",
             font_size=40
-        ).align_to(fmlto7_1[13:],LEFT)
-        fmlto7_y = fmlto7_1[13:].get_y()
+        ).align_to(fmlto7_1[12:],LEFT)
+        fmlto7_y = fmlto7_1[12:].get_y()
         self.play(
             FadeOut(fml6,target_position=fmlto7_1[-1]),
-            TransformMatchingShapes(fmlto7_1[13:],fmlto7_2[:3].set_y(fmlto7_y))
+            TransformMatchingShapes(fmlto7_1[12:],fmlto7_2[:3].set_y(fmlto7_y))
         )
         
         self.play(
@@ -582,7 +582,7 @@ class V_P1(Scene):
         self.wait()
         fml11 = MathTex(
             "x","&=",
-            r"\frac{q\cdot\cos\theta + mq}{1-m^2}+\frac{mL}{1-m^2}"r"\\",
+            r"-\frac{q\cdot\cos\theta + mq}{1-m^2}+\frac{mL}{1-m^2}"r"\\",
             "x","&=",
             r"-\frac L{2\left( 1-m\right)}\left(\frac yL\right)^{1-m}+\frac L{2\left(1+m\right)}\left(\frac yL\right)^{1+m}+\frac{mL}{1-m^2}"
             r"\\",

@@ -2,6 +2,7 @@ from manim import *
 
 class Tst(Scene):
     def construct(self):
+        self.camera.background_color = "#333233"
         title = Title(r"猎犬追狐问题",color=GOLD,tex_template=TexTemplateLibrary.ctex)
 
         self.play(Write(title), run_time=2)
