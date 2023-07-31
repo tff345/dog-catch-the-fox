@@ -4,10 +4,12 @@ class V_Intro(Scene):
     def construct(self):
         self.camera.background_color = "#333233"
         title = Title(r"猎犬追狐问题",color=GOLD,tex_template=TexTemplateLibrary.ctex)
+        
         def introtext(content,myfont="HarmonyOS Sans SC Light"):
             return MarkupText(
                 content,font=myfont,font_size=60,justify=True
                 ).scale(0.5)
+        self.wait(2)
 
         self.play(Write(title), run_time=2)
         self.wait()

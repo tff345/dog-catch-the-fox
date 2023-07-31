@@ -75,4 +75,26 @@ class V_Finale(Scene):
         txtf5 = VGroup(txtf5_1,txtf5_2).move_to(fig_3.get_bottom())
         self.play(FadeIn(txtf5))
         self.wait(2)
+        self.play(FadeOut(*[txtf5,txtf4,fig_3]))
+        fig_4 = ImageMobject(
+            filename_or_array="./assets/myimg2-2.png",
+        ).scale(0.5)
+        self.play(
+            fmlendvar.animate.scale(0.7).next_to(fig_4,DOWN)
+        )
+        txtf6 = VGroup(
+            mytext("改变"),mytex("m"),mytext("的值，画出出一系列追击曲线")
+        ).arrange(RIGHT).set_opacity(0.7).next_to(fig_4,UP)
+        self.play(Write(txtf6))
+        self.play(FadeIn(fig_4))
+        self.wait(4)
+        self.play(fig_4.animate.scale(1.5))
+        self.wait(2)
+        self.play(FadeOut(*[fig_4,txtf6,fmlendvar],scale=3))
+        txtf7 = Text("至此，关于猎犬追狐问题的讨论告一段落。",t2c={'[5:11]':'#ff9900'})
+        txtf8 = Text("感谢观看",font='HarmonyOS Sans SC',color=BLUE_C)
+        self.play(Write(txtf7))
+        self.wait(2)
+        self.play(Transform(txtf7,txtf8))
+        self.wait()
         

@@ -616,4 +616,5 @@ class V_P1(Scene):
             FadeOut(*[fig_1,txt18,txt19],shift=UP),
             fml12.animate.move_to((0,-2,0)),
         )
+        self.wait()
 

@@ -1,8 +1,8 @@
 from manim import *
 
-def myfunc(x, pm,pL):
+def myfunc(x, pm=0.5,pL=1):
     x = np.abs(x)
-    return -(pL/2*(1-pm))*(x/pL)**(1-pm) + (pL/2*(1+pm))*(x/pL)**(1+pm) + pm*pL/(1-pm**2)
+    return -(pL/(2*(1-pm)))*(x/pL)**(1-pm) + (pL/(2*(1+pm)))*(x/pL)**(1+pm) + pm*pL/(1-pm**2)
 class PlotParametricFunction(Scene):
     def func(self, t,pm=0.5,pL=2):
         return np.array((myfunc(t,pm,pL), t, 0.))

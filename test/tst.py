@@ -15,8 +15,12 @@ class V_Finale(Scene):
         VGroup(fig_2,fig_3).arrange(RIGHT,buff=.5)
         fig_4 = ImageMobject(
             filename_or_array="./assets/myimg2-2.png",
-            height=3
-        )
-        self.add(fig_4)
+        ).scale(0.5)
+        txtf7 = Text("至此，关于猎犬追狐问题的讨论告一段落。",t2c={'[5:11]':'#ff9900'})
+        txtf8 = Text("感谢观看",font='HarmonyOS Sans SC',color=BLUE_C)
+        self.play(Write(txtf7))
+        self.play(Transform(txtf7,txtf8))
+
+        #self.add(fig_4)
         
         
