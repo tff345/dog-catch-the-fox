@@ -3,11 +3,11 @@ from manim import *
 class V_Finale(Scene):
     def construct(self):
         self.camera.background_color = "#333233"
-        def mytext(content):
-           return MarkupText(content, font_size=26)
+        def mytext(content,ft_sz=26):
+           return MarkupText(content, font_size=ft_sz)
         
-        def mytex(content):
-            return MathTex(content,font_size=36)
+        def mytex(content,ft_sz=36):
+            return MathTex(content,font_size=ft_sz)
         
         fmlend = MathTex(
             "x","&=",
@@ -46,7 +46,7 @@ class V_Finale(Scene):
             r"x & = -\frac {y^{1-m}}{2\left( 1-m\right)}+"
             r"\frac {y^{1+m}}{2\left(1+m\right)}+\frac m{1-m^2}",
             font_size=36
-        ).move_to(fmlend,DL)
+        ).move_to(fmlend,DOWN).shift(DOWN*0.6)
         self.play(
             Write(txtf4),
             TransformMatchingShapes(fmlend,fmlendvar,transform_mismatches=True)
@@ -62,5 +62,17 @@ class V_Finale(Scene):
             ).next_to(txtf4,DOWN*0.3)
         self.play(FadeIn(fig_2))
         self.wait()
-        self.play(Transform(fig_2,fig_3))
+        self.play(
+            FadeOut(fig_2,scale=0.4),
+            FadeIn(fig_3,scale=0.4)
+        )
+        txtf5 = VGroup(
+            mytext("*根据其物理意义，曲线",20),mytex("y > 1",25),mytext("的部分对应",20),
+            mytex("t<0",25),mytext("的时刻的运动，",20),mytext("  即犬追击迎面而来的狐时的轨迹。",20)
+        )
+        txtf5_1 = txtf5[:-1].arrange(RIGHT)
+        txtf5_2 = txtf5[-1].next_to(txtf5[:-1],DOWN).align_to(txtf5[:-1],LEFT)
+        txtf5 = VGroup(txtf5_1,txtf5_2).move_to(fig_3.get_bottom())
+        self.play(FadeIn(txtf5))
         self.wait(2)
+        
