@@ -198,6 +198,7 @@ class V_P1(Scene):
                 fmlto6[n:3*n+3],fmlto6[3*n+3:3*n+6].set_y(fml5.get_y())
                 )
             )
+            self.wait(0.7)
         
         fml6 = MathTex(
             r"t_1=",r"-\frac{v_1 \cos \theta +v_2}{v_2^2-v_1^2} \cdot q + \frac{v_2}{ v_2^2-v_1^2 } \cdot L",
@@ -382,6 +383,7 @@ class V_P1(Scene):
             for i in range(3*n,3*n+3)
              ]
             )
+            self.wait(0.5)
         self.play(
             TransformMatchingShapes(
             fmlto8[21:24].set_y(0),fmlto8[24:27].set_y(0),
@@ -453,6 +455,7 @@ class V_P1(Scene):
             for i in range(3*n,3*n+3)
              ]
             )
+            self.wait(0.7)
         self.wait(2)
         txt15 = VGroup(
             mytext(r"因为"),
@@ -568,6 +571,7 @@ class V_P1(Scene):
                 for i in range(6*n,6*n+6)
                 ]
             )
+            self.wait(0.7)
         self.play(
             FadeOut(fmltriangle,shift=RIGHT),
             fmlto11[-6:].animate.scale(0.8).move_to(
