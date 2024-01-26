@@ -76,7 +76,7 @@ class V_P1(Scene):
         self.wait(3)
         txt2 = VGroup(
             mytext("设"),mytex("D_1"),mytext("与"),mytex("F_1"),
-            mytext("间距离为"),mytex(r"q,\:FF_1"),mytext("与"),mytex("DF"),
+            mytext("间距离为"),mytex(r"q,\:FF_1"),mytext("与"),mytex("D_1F_1"),
             mytext("夹角为"), mytex(r"\theta")
         ).arrange(RIGHT).next_to(question.get_bottom(),DOWN)
         self.play(Write(txt2))
@@ -88,9 +88,14 @@ class V_P1(Scene):
         grp_q = VGroup(br, br_txt)
         self.play(FadeIn(grp_q))
         self.play(Write(grp_ang))
+        txt2a = txt2 = VGroup(
+            mytex("F_1"),
+            mytext("横坐标为"),mytex(r"x_1,\:D_1"),mytext("横纵坐标为"),mytex("\left(x_2,y_2  \right)"),
+        ).arrange(RIGHT).next_to(txt2.get_bottom(),DOWN)
+        self.play(Write(txt2a))
         self.wait()
        
-        self.play(Unwrite(txt2),run_time=0.8)
+        self.play(Unwrite(txt2,txt2a),run_time=1)
         self.play(Unwrite(question),run_time=0.8)
         fig_1 = VGroup(ax,curv1,grp_d,grp_d1,grp_f,grp_f1,grp_ang,grp_q,dsd_line)
         self.play(fig_1.animate.scale(0.6).shift(UP*4+RIGHT*5))
@@ -98,10 +103,10 @@ class V_P1(Scene):
         
         self.next_section("100",skip_animations=False)
         txt3_1 = VGroup(
-            mytext("设"),mytex("FF_1"),mytext("方向上的位置关系为")
+            mytext("在"),mytex("FF_1"),mytext("方向上有")
         ).arrange(RIGHT)
         txt3_2 = VGroup(
-            mytex("DF_1"),mytext("方向上的位置关系为")
+            mytex("DF_1"),mytext("方向上有")
         ).arrange(RIGHT).next_to(txt3_1,DOWN*3).align_to(txt3_1,LEFT)
         fml1a = mytex(r" x_1 = x_2 + q\cdot \cos \theta ").next_to(txt3_1,DOWN)
         fml2a = mytex(r" x_1' = x_2' + q ").next_to(txt3_2,DOWN)
@@ -235,15 +240,19 @@ class V_P1(Scene):
         fmlto7_2 = MathTex(
             "x","&=",r"-q\cdot \cos\theta+v_1" # fmlto7_3
             r"\left(-\frac{v_1 \cos \theta +v_2}{v_2^2-v_1^2} \cdot q+ \frac{v_2}{ v_2^2-v_1^2 } \cdot L\right)\\",
+            
             "x","&=",r"-q\cdot \cos \theta" # fmlto7_4
-            r"-\left(\frac{v_1^2 \cos \theta +v_1 v_2}{v_2^2-v_1^2}"
-            r"\cdot q+\frac{v_1v_2}{ v_2^2-v_1^2 } \cdot L\right)\\",
+            r"-\frac{v_1^2 \cos \theta + v_1 v_2}{v_2^2-v_1^2}"
+            r"\cdot q+\frac{v_1v_2}{ v_2^2-v_1^2 } \cdot L\\",
+            
             "x","&=",r"-q\cdot \cos\theta" # fmlto7_5
-            r"-\left(\frac{m^2 \cos \theta +m}{1-m^2}"
-            r"\cdot q+ \frac{m}{1-m^2} \cdot L\right)\\",
-            "x ","&=",r"- \left( \cos\theta+\frac{m^2 \cos\theta+m}{1-m^2}\right)" # fmlto7_6
+            r"-\frac{m^2 \cos \theta +m}{1-m^2}"
+            r"\cdot q+ \frac{m}{1-m^2} \cdot L\\",
+            
+            "x","&=",r"-\left( \cos\theta+\frac{m^2 \cos\theta+m}{1-m^2} \right)" # fmlto7_6
             r"\cdot q -\frac{m}{1-m^2} \cdot L\\",
-            "x ","&= ",r"-\frac{q\cdot\cos\theta + mq}{1-m^2}" # fml7
+            
+            "x","&=",r"-\frac{q\cdot\cos\theta + mq}{1-m^2}" # fml7
             r"+\frac{mL}{1-m^2}\\",
             font_size=40
         ).align_to(fmlto7_1[13:],LEFT)
@@ -286,14 +295,14 @@ class V_P1(Scene):
         
         # # # 
         txt9 = VGroup(
-            mytext(r"为求出犬D的轨迹方程, 还需找出D的纵坐标"),
+            mytext(r"为求出犬的轨迹方程, 还需找出纵坐标"),
             mytex(r"y"),
             mytext(r"与"),
             mytex(r"q, \theta"),
             mytext(r"的关系, "),
             mytext(r"即用"),
             mytex(r"y"),
-            mytext(r"来表示式中的"),
+            mytext(r"来消去变量"),
             mytex(r"q\cdot \cos \theta, q"),
         )
         txt9_1 = txt9[:5].arrange(RIGHT)
