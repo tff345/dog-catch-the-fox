@@ -90,7 +90,7 @@ class V_P1(Scene):
         self.play(Write(grp_ang))
         txt2a = txt2 = VGroup(
             mytex("F_1"),
-            mytext("横坐标为"),mytex(r"x_1,\:D_1"),mytext("横纵坐标为"),mytex("\left(x_2,y_2  \right)"),
+            mytext("横坐标为"),mytex(r"x_1,\:D_1"),mytext("横纵坐标为"),mytex(r"\left(x_2,y  \right)"),
         ).arrange(RIGHT).next_to(txt2.get_bottom(),DOWN)
         self.play(Write(txt2a))
         self.wait()
@@ -139,11 +139,11 @@ class V_P1(Scene):
         self.wait()
         self.play(Uncreate(arr1))
         
-        txt5 = mytext('同时我们有位置关系的积分表示').next_to(txt4,DOWN).align_to(txt4, LEFT)
+        txt5 = mytext('将位置关系再次用积分形式表示').next_to(txt4,DOWN).align_to(txt4, LEFT)
         arr2 = MathTex("\Longleftarrow", font_size=36).move_to((0,0.5,0))
         fml4_v_int = MathTex(
-        " & v_1 t_1 ","=",r"\int_{0}^{t_1}(v_2 \cdot \cos \theta ) \mathrm{d}t +q\cdot\cos\theta \\ ",
-        r" & \int_{0}^{t_1}(v_1 \cdot \cos \theta )\mathrm{d}t+L","=","v_2 t_1 + q ",
+        " & v_1 t_1 ","=",r"\int_{0}^{t_1}\left(v_2 \cdot \cos \theta \right) \mathrm{d}t +q\cdot\cos\theta \\ ",
+        r" & \int_{0}^{t_1}\left(v_1 \cdot \cos \theta \right)\mathrm{d}t+L","=","v_2 t_1 + q ",
         font_size=36
         ).move_to((-3.5,0.5,0))
         self.play(Write(txt5), Write(arr2))
@@ -179,12 +179,12 @@ class V_P1(Scene):
         fmlto6 = MathTex(
             r" \frac { v_2 } { v_1 }",r"&= ", # fmlto6c_1
             r"\frac{v_1 t_1 - q\cdot\cos\theta}{v_2 t_1 + q - L}"r"\\",
-            r" v_2 ( v_2 t_1 + q - L)",r"&=", # fmlto6c_2
-            r" v_1 ( v_1 t_1 - q \cdot \cos \theta )"r"\\",
+            r" v_2 \left( v_2 t_1 + q - L\right)",r"&=", # fmlto6c_2
+            r" v_1 \left( v_1 t_1 - q \cdot \cos \theta \right)"r"\\",
             r"v_2^2 t_1 + v_2 q-v_2L ",r"&=", # fmlto6c_3
             r" v_1^2t_1-v_1 q\cos \theta"r"\\", 
-            r"(v_2^2-v_1^2)t_1 ",r"&=", # fmlto6c_4
-            r"-(v_1\cos\theta+v_2)q+v_2L"r"\\",
+            r"\left( v_2^2-v_1^2 \right) t_1 ",r"&=", # fmlto6c_4
+            r"-\left( v_1\cos\theta+v_2 \right)q+v_2L"r"\\",
             font_size=40
         ).align_to(fml5,LEFT)
         
@@ -315,7 +315,7 @@ class V_P1(Scene):
         ).next_to(txt9_2,DOWN).align_to(txt9_1,LEFT)
         self.play(Write(txt10))      
         fml3_1 = MathTex(
-            r"\frac{\mathrm{d}}{\mathrm{d}t}(q\cos\theta)","&=",
+            r"\frac{\mathrm{d}}{\mathrm{d}t} \left( q\cos\theta \right)","&=",
             r"v_1-v_2\cos\theta"
             r'\\',
             r"\frac{\mathrm{d} q}{\mathrm{d} t}","&=",
@@ -334,7 +334,7 @@ class V_P1(Scene):
         ]
         )
         fmlto8 = MathTex(
-            r"\frac{\mathrm{d}}{\mathrm{d}q}(q\cos\theta)",
+            r"\frac{\mathrm{d}}{\mathrm{d}q}\left( q\cos\theta \right)",
             "&=",
             r"\frac{v_1-v_2\cos\theta}{v_1\cos\theta-v_2}"r"\\",
             r"\cos \theta-q\sin\theta\cdot\frac{\mathrm{d} \theta}{\mathrm{d} q}",
