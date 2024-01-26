@@ -6,14 +6,6 @@
  当然，个人认为，因为受某道题的影响，这里的思路不是最好的，另请参见[这种更标准的解法](https://www.zhihu.com/question/49115473/answer/114351214)。
 ------------------------
 
-## Example1：
-####  `manim -qm -p ./test/v_part_1.py Tst`  
-![image](https://github.com/tff345/dog-catch-the-fox/assets/104703494/ec2f2303-c4ac-40e9-9b26-174b9dcc8225) 
-
-## Examp2：
-####  `manim -qm -p ./test/axis.py Tst`
-![image](https://github.com/tff345/dog-catch-the-fox/assets/104703494/82d736b3-f7e7-458c-ad5b-fc7b4b10e51c)
-## Example3:  
-#### `manim -qm -p ./tst_txt.py Tst`  
-![image](https://github.com/tff345/dog-catch-the-fox/assets/104703494/c4c00759-0e08-444c-8676-64237a05e724)
-
+## Example：
+[视频](https://www.bilibili.com/video/BV1s94y1e7V4/)
+<iframe src="//player.bilibili.com/player.html?aid=361678063&bvid=BV1s94y1e7V4&cid=1217518404&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>  
